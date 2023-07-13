@@ -1,0 +1,3388 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/block": {
+      "get": {
+        "operationId": "aptos_getBlocks",
+        "summary": "Get blocks",
+        "description": "Get blocks",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBlockResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/blockFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getBlocksFromTimeToTime",
+        "summary": "Get blocks from timestamp to timestamp",
+        "description": "Get blocks from timestamp to timestamp.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListBlockResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/blockFromNumToNum": {
+      "get": {
+        "operationId": "aptos_getBlocksFromNumToNum",
+        "summary": "Get blocks from number to number",
+        "description": "Get blocks from number to number.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListBlockResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/hash/{block_hash}": {
+      "get": {
+        "operationId": "aptos_getBlockByHash",
+        "summary": "Get block by hash",
+        "description": "Get the contents of a block given the block hash.",
+        "parameters": [
+          {
+            "name": "block_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BaseBlockDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/height/{block_height}": {
+      "get": {
+        "operationId": "aptos_getBlockByHeight",
+        "summary": "Get block by block height",
+        "description": "Get the contents of a block given the block height.",
+        "parameters": [
+          {
+            "name": "block_height",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BaseBlockDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/version/{version}": {
+      "get": {
+        "operationId": "aptos_getBlockByVersion",
+        "summary": "Get block by version",
+        "description": "Get the contents of a block given the block version.",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BaseBlockDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event": {
+      "get": {
+        "operationId": "aptos_getEvents",
+        "summary": "Get events",
+        "description": "Get events.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/eventFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getEventFromBlockToBlock",
+        "summary": "Get events from block to block",
+        "description": "Get events from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/eventFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getEventFromTimeToTime",
+        "summary": "Get events from timestamp to timestamp",
+        "description": "Get events from timestamp to timestamp.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/eventFromVersionToVersion": {
+      "get": {
+        "operationId": "aptos_getEventFromVersionToVersion",
+        "summary": "Get events from version to version",
+        "description": "Get events from version to version.",
+        "parameters": [
+          {
+            "name": "from_version",
+            "required": true,
+            "in": "query",
+            "description": "The minimum version number",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_version",
+            "required": true,
+            "in": "query",
+            "description": "The maximum version number",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft": {
+      "get": {
+        "operationId": "aptos_nfts",
+        "summary": "Get multiple NFTs",
+        "description": "Returns an array of NFTs.",
+        "parameters": [
+          {
+            "name": "collection_name",
+            "required": false,
+            "in": "query",
+            "description": "Collection name of NFT",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "creator_address",
+            "required": false,
+            "in": "query",
+            "description": "Creator address of NFT",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "NFT name",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNftResponseDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFTs"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft/nftsOfCollection/{collectionDataIdHash}": {
+      "get": {
+        "operationId": "aptos_nftsOfCollection",
+        "summary": "Get NFTs by collection",
+        "description": "Get NFTs for a given collection, including metadata for all NFTs (where available).",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "collectionDataIdHash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNftResponseDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFTs"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/collection": {
+      "get": {
+        "operationId": "aptos_getCollections",
+        "summary": "Get NFT collection",
+        "description": "Returns an array of NFT collections.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCollectionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT collections"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity": {
+      "get": {
+        "operationId": "aptos_nftActivities",
+        "summary": "Get NFT activities",
+        "description": "Returns an array of NFT activities.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesByBlock/{block_height}": {
+      "get": {
+        "operationId": "aptos_nftActivitiesByBlock",
+        "summary": "Get NFT activities by block",
+        "description": "Returns an array of NFT activities of a block.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "block_height",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_nftActivitiesFromBlockToBlock",
+        "summary": "Get NFT activities from block to block",
+        "description": "Returns an array of NFT activities from a block to a block.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_nftActivitiesFromTimeToTime",
+        "summary": "Get NFT activities from timestamp to timestamp",
+        "description": "Returns an array of NFT activities from timestamp to timestamp.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesOfCollection/{collection}": {
+      "get": {
+        "operationId": "aptos_nftActivitiesOfCollection",
+        "summary": "Get NFT activities of a collection",
+        "description": "Returns an array of NFT activities of a collection.",
+        "parameters": [
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesByBlock/{collection}/{block_height}": {
+      "get": {
+        "operationId": "aptos_nftActivitiesOfCollectionByBlock",
+        "summary": "Get NFT activities by block",
+        "description": "Returns an array of NFT activities of a block.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "block_height",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesFromBlockToBlock/{collection}": {
+      "get": {
+        "operationId": "aptos_nftActivitiesOfCollectionFromBlockToBlock",
+        "summary": "Get NFT activities from block to block",
+        "description": "Returns an array of NFT activities from a block to a block.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/nft-activity/nftActivitiesFromTimeToTime/{collection}": {
+      "get": {
+        "operationId": "aptos_nftActivitiesOfCollectionFromTimeToTime",
+        "summary": "Get NFT activities from timestamp to timestamp",
+        "description": "Returns an array of NFT activities from timestamp to timestamp.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftActivityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get NFT activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions": {
+      "get": {
+        "operationId": "aptos_getTransactions",
+        "summary": "Get transactions",
+        "description": "Get transactions.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/txFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getTxFromBlockToBlock",
+        "summary": "Get transactions from block to block",
+        "description": "Get transactions from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/txFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getTxFromTimeToTime",
+        "summary": "Get transactions from timestamp to timestamp",
+        "description": "Get transactions from timestamp to timestamp.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/txFromVersionToVersion": {
+      "get": {
+        "operationId": "aptos_getTxFromVersionToVersion",
+        "summary": "Get transactions from version to version",
+        "description": "Get transactions from version to version.",
+        "parameters": [
+          {
+            "name": "from_version",
+            "required": true,
+            "in": "query",
+            "description": "The minimum version number",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_version",
+            "required": true,
+            "in": "query",
+            "description": "The maximum version number",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/hash/{hash}": {
+      "get": {
+        "operationId": "aptos_getTransactionByHash",
+        "summary": "Get a transaction by hash",
+        "description": "Get a transaction by hash",
+        "parameters": [
+          {
+            "name": "hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/version/{version}": {
+      "get": {
+        "operationId": "aptos_getTransactionByVersion",
+        "summary": "Get a transaction by version",
+        "description": "Get a transaction by version",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/block/{block_height}": {
+      "get": {
+        "operationId": "aptos_getTransactionsByBlockNumber",
+        "summary": "Get transactions by block height",
+        "description": "Get transactions by block height",
+        "parameters": [
+          {
+            "name": "block_height",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/type/{type}": {
+      "get": {
+        "operationId": "aptos_getTransactionsByType",
+        "summary": "Get transactions by type",
+        "description": "Get transactions by type",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-payloads": {
+      "get": {
+        "operationId": "aptos_getTxPayloads",
+        "summary": "Get transaction payloads",
+        "description": "Get transaction payloads.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxPayloadResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction payloads"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-payloads/txPayloadFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getTxPayloadFromBlockToBlock",
+        "summary": "Get transaction payloads from block to block",
+        "description": "Get transaction payloads from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxPayloadResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction payloads"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-payloads/txPayloadFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getTxPayloadFromTimeToTime",
+        "summary": "Get transaction payloads from timestamp to timestamp",
+        "description": "Get transaction payloads from timestamp to timestamp",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxPayloadResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction payloads"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-payloads/txPayloadFromVersionToVersion": {
+      "get": {
+        "operationId": "aptos_getTxPayloadFromVersionToVersion",
+        "summary": "Get transaction payloads from version to version",
+        "description": "Get transaction payloads from version to version.",
+        "parameters": [
+          {
+            "name": "from_version",
+            "required": true,
+            "in": "query",
+            "description": "The minimum version number",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_version",
+            "required": true,
+            "in": "query",
+            "description": "The maximum version number",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxPayloadResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction payloads"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-signatures": {
+      "get": {
+        "operationId": "aptos_getTxSignature",
+        "summary": "Get transaction signatures",
+        "description": "Get transaction signatures.",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxSignatureResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction signatures"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-signatures/txSignatureFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getTxSignatureFromBlockToBlock",
+        "summary": "Get transaction signatures from block to block",
+        "description": "Get transaction signatures from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxSignatureResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction signatures"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-signatures/txSignatureFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getTxSignatureFromTimeToTime",
+        "summary": "Get transaction signatures from timestamp to timestamp",
+        "description": "Get transaction signatures from timestamp to timestamp.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxSignatureResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction signatures"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-signatures/txSignatureFromVersionToVersion": {
+      "get": {
+        "operationId": "aptos_getTxSignatureFromVersionToVersion",
+        "summary": "Get transaction signatures from version to version",
+        "description": "Get transaction signatures from version to version.",
+        "parameters": [
+          {
+            "name": "from_version",
+            "required": true,
+            "in": "query",
+            "description": "The minimum version number",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_version",
+            "required": true,
+            "in": "query",
+            "description": "The maximum version number",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxSignatureResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction signatures"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-changes/{transaction_hash}": {
+      "get": {
+        "operationId": "aptos_getTxChanges",
+        "summary": "Get transaction changes by hash",
+        "description": "Get transaction changes by hash",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxChangeResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction changes"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-changes/txChangeFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getTxChangeFromBlockToBlock",
+        "summary": "Get transaction changes from block to block",
+        "description": "Get transaction changes from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxChangeResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction changes"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-changes/txChangeFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getTxChangeFromTimeToTime",
+        "summary": "Get transaction changes from timestamp to timestamp",
+        "description": "Get transaction changes from timestamp to timestamp",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxChangeResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction changes"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/tx-changes/txChangeFromVersionToVersion": {
+      "get": {
+        "operationId": "aptos_getTxChangeFromVersionToVersion",
+        "summary": "Get transaction changes from version to version",
+        "description": "Get transaction changes from version to version.",
+        "parameters": [
+          {
+            "name": "from_version",
+            "required": true,
+            "in": "query",
+            "description": "The minimum version number",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_version",
+            "required": true,
+            "in": "query",
+            "description": "The maximum version number",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTxChangeResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transaction changes"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin": {
+      "get": {
+        "operationId": "aptos_getCoins",
+        "summary": "Get coins",
+        "description": "Get coins.",
+        "parameters": [
+          {
+            "name": "coin_type",
+            "required": false,
+            "in": "query",
+            "description": "Coin Type",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "creator_address",
+            "required": false,
+            "in": "query",
+            "description": "Creator Address",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get tokens"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity": {
+      "get": {
+        "operationId": "aptos_getCoinActivities",
+        "summary": "Get coin activities",
+        "description": "Get coin activities",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityByBlock": {
+      "get": {
+        "operationId": "aptos_getCoinActivitiesByBlock",
+        "summary": "Get coin activities by block",
+        "description": "Get coin activities by block",
+        "parameters": [
+          {
+            "name": "block_height",
+            "required": true,
+            "in": "query",
+            "description": "Block height",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getCoinActivitiesFromBlockToBlock",
+        "summary": "Get coin activities from block to block",
+        "description": "Get coin activities from block to block",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getCoinActivitiesFromTimeToTime",
+        "summary": "Get coin activities from timestamp to timestamp",
+        "description": "Get coin activities from timestamp to timestamp",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityByType": {
+      "get": {
+        "operationId": "aptos_getCoinActivitiesByType",
+        "summary": "Get coin activities by coin type",
+        "description": "Get coin activities by coin type",
+        "parameters": [
+          {
+            "name": "coin_type",
+            "required": true,
+            "in": "query",
+            "description": "Coin type",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityByTypeAndBlock": {
+      "get": {
+        "operationId": "aptos_getCoinActivitiesByTypeAndBlock",
+        "summary": "Get coin activities by coin type and block number",
+        "description": "Get coin activities by coin type and block number",
+        "parameters": [
+          {
+            "name": "coin_type",
+            "required": true,
+            "in": "query",
+            "description": "Coin type",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "block_height",
+            "required": true,
+            "in": "query",
+            "description": "Block height",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityOfTypeFromBlockToBlock": {
+      "get": {
+        "operationId": "aptos_getActivitiesOfTypeFromBlockToBlock",
+        "summary": "Get activities of a coin type from block to block",
+        "description": "Get activities of a coin type from block to block",
+        "parameters": [
+          {
+            "name": "coin_type",
+            "required": true,
+            "in": "query",
+            "description": "Coin type",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/coin-activity/activityOfTypeFromTimeToTime": {
+      "get": {
+        "operationId": "aptos_getActivitiesOfTypeFromTimeToTime",
+        "summary": "Get activities of a coin type from timestamp to timestamp",
+        "description": "Get activities of a coin type from timestamp to timestamp",
+        "parameters": [
+          {
+            "name": "coin_type",
+            "required": true,
+            "in": "query",
+            "description": "Coin type",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListCoinActivityResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get token activities"],
+        "security": [{ "apiKey": [] }]
+      }
+    }
+  },
+  "info": {
+    "title": "APTOS APIs",
+    "description": "Swagger documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "https://aptos-mainnet-api.blocklens.io",
+      "description": "Aptos Mainnet Dev Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" },
+      "basic": { "type": "http", "scheme": "basic" },
+      "apiKey": { "type": "apiKey", "name": "X-API-KEY", "in": "header" }
+    },
+    "schemas": {
+      "BaseBlockDto": {
+        "type": "object",
+        "properties": {
+          "blockHeight": {
+            "type": "number",
+            "example": "53316416",
+            "description": "blockHeight"
+          },
+          "blockHash": {
+            "type": "string",
+            "example": "0x7e687b87fe8e8d2b8af953035e6aee2b570555720d9dd1344f2dfbd0f9dae93c",
+            "description": "blockHash"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "1970-01-01 08:00:00.000",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": "1683416298003828",
+            "description": "timestamp"
+          },
+          "firstVersion": {
+            "type": "number",
+            "example": "136910820",
+            "description": "firstVersion"
+          },
+          "lastVersion": {
+            "type": "number",
+            "example": "136910820",
+            "description": "lastVersion"
+          }
+        },
+        "required": [
+          "blockHeight",
+          "blockHash",
+          "blockTime",
+          "timestamp",
+          "firstVersion",
+          "lastVersion"
+        ]
+      },
+      "ListBlockResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Blocks",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BaseBlockDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "LogResponseDto": {
+        "type": "object",
+        "properties": {
+          "blockHeight": {
+            "type": "number",
+            "example": 48569766,
+            "description": "blockHeight"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-06-13 18:17:09.819",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1686655029819390,
+            "description": "timestamp"
+          },
+          "txVersion": {
+            "type": "number",
+            "example": 125033617,
+            "description": "txVersion"
+          },
+          "txHash": {
+            "type": "string",
+            "example": "0xdf4b0d8b621cd39e3d3dc4e24f82f0ad045014653aa0ccee9256810e1db3c8ef",
+            "description": "txHash"
+          },
+          "txType": {
+            "type": "string",
+            "example": "block_metadata_transaction",
+            "description": "txType"
+          },
+          "creationNumber": {
+            "type": "number",
+            "example": 3,
+            "description": "creationNumber"
+          },
+          "accountAddress": {
+            "type": "string",
+            "example": "0xb723f7fb05992065f97b0562bf5a6eac95f6044134efd2ee2bf95607eb1942c7",
+            "description": "accountAddress"
+          },
+          "sequenceNumber": {
+            "type": "number",
+            "example": 17,
+            "description": "sequenceNumber"
+          },
+          "type": {
+            "type": "string",
+            "example": "0x1::coin::WithdrawEvent",
+            "description": "type"
+          },
+          "eventIndex": {
+            "type": "number",
+            "example": 1,
+            "description": "eventIndex"
+          },
+          "amount": {
+            "type": "number",
+            "example": 4441891,
+            "description": "amount",
+            "nullable": true
+          },
+          "moduleName": {
+            "type": "string",
+            "example": "0x6173736574",
+            "description": "moduleName",
+            "nullable": true
+          },
+          "structName": {
+            "type": "string",
+            "example": "0x6173736574",
+            "description": "structName",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "example": "{\"amount\": \"11385\"}",
+            "description": "data"
+          }
+        },
+        "required": [
+          "blockHeight",
+          "blockTime",
+          "timestamp",
+          "txVersion",
+          "txHash",
+          "txType",
+          "creationNumber",
+          "accountAddress",
+          "sequenceNumber",
+          "type",
+          "eventIndex",
+          "amount",
+          "moduleName",
+          "structName",
+          "data"
+        ]
+      },
+      "ListLogResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "BaseNftDto": {
+        "type": "object",
+        "properties": {
+          "collection_data_id_hash": {
+            "type": "string",
+            "example": "24a96a93ebc97746f7001326cf7c5747d5bd61c78813e154371e8d6ca1c881e3",
+            "description": "collectionDataIdHash"
+          },
+          "collection_name": {
+            "type": "string",
+            "example": "Aptos Mice Club",
+            "description": "collectionName"
+          },
+          "creator_address": {
+            "type": "string",
+            "example": "0x9954a427a8eef9a11d3ec578c29e9592ee7e0d1147e9b58297b130b21cc17424",
+            "description": "creatorAddress"
+          },
+          "name": {
+            "type": "string",
+            "example": "Aptos Mice Club - #1050",
+            "description": "name"
+          },
+          "property_version": {
+            "type": "number",
+            "example": "0",
+            "description": "propertyVersion"
+          },
+          "token_data_id_hash": {
+            "type": "string",
+            "example": "29389de555c39b96dbaa83cbd4f53156969ea74a02ec9eaa2f5723d435b59949",
+            "description": "tokenDataIdHash"
+          },
+          "token_properties": {
+            "type": "object",
+            "example": {
+              "EYES": 1399682407,
+              "HEAD": 285387749230,
+              "MOUTH": 5464420,
+              "SHIRT": 8.268578594926225e25,
+              "HELMET": 5578108813654980000,
+              "TATTOO": 1416585572,
+              "EARINGS": 310939249016,
+              "BACKGROUND": 1.3869243956110336e33,
+              "BACK OBJECT": 91759383307631
+            },
+            "description": "tokenProperties"
+          },
+          "transaction_version": {
+            "type": "number",
+            "example": "9023902",
+            "description": "transactionVersion"
+          },
+          "transaction_timestamp": {
+            "type": "number",
+            "example": "1666503854414696",
+            "description": "transactionTimestamp"
+          },
+          "block_height": {
+            "type": "number",
+            "example": "2522147",
+            "description": "blockHeight"
+          }
+        },
+        "required": [
+          "collection_data_id_hash",
+          "collection_name",
+          "creator_address",
+          "name",
+          "property_version",
+          "token_data_id_hash",
+          "token_properties",
+          "transaction_version",
+          "transaction_timestamp",
+          "block_height"
+        ]
+      },
+      "ListNftResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Nfts",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BaseNftDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "BaseCollectionDto": {
+        "type": "object",
+        "properties": {
+          "collection_data_id_hash": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "collectionDataIdHash"
+          },
+          "collection_name": {
+            "type": "string",
+            "example": "Aptos Names V1",
+            "description": "collectionName"
+          },
+          "creator_address": {
+            "type": "string",
+            "example": "0x305a97874974fdb9a7ba59dc7cab7714c8e8e00004ac887b6e348496e1981838",
+            "description": "creatorAddress"
+          },
+          "description": {
+            "type": "string",
+            "example": ".apt names from Aptos Labs",
+            "description": "description"
+          },
+          "description_mutable": {
+            "type": "boolean",
+            "example": true,
+            "description": "descriptionMutable"
+          },
+          "maximum": {
+            "type": "number",
+            "example": "0",
+            "description": "maximum"
+          },
+          "maximum_mutable": {
+            "type": "boolean",
+            "example": false,
+            "description": "maximumMutable"
+          },
+          "metadata_uri": {
+            "type": "string",
+            "example": "https://aptosnames.com",
+            "description": "metadataUri"
+          },
+          "supply": { "type": "number", "example": 0, "description": "supply" },
+          "table_handle": {
+            "type": "string",
+            "example": "0x5a608d04222bd2de8c9fe6ddc7bc277c390cbc87bdf2688fcdb513b34179fe69",
+            "description": "tableHandle"
+          },
+          "transaction_timestamp": {
+            "type": "number",
+            "example": 1666163370263051,
+            "description": "transactionTimestamp"
+          },
+          "transaction_version": {
+            "type": "number",
+            "example": 2781307,
+            "description": "transactionVersion"
+          },
+          "uri_mutable": {
+            "type": "boolean",
+            "example": true,
+            "description": "uriMutable"
+          }
+        },
+        "required": [
+          "collection_data_id_hash",
+          "collection_name",
+          "creator_address",
+          "description",
+          "description_mutable",
+          "maximum",
+          "maximum_mutable",
+          "metadata_uri",
+          "supply",
+          "table_handle",
+          "transaction_timestamp",
+          "transaction_version",
+          "uri_mutable"
+        ]
+      },
+      "ListCollectionResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Collections",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BaseCollectionDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "BaseNftActivityDto": {
+        "type": "object",
+        "properties": {
+          "transfer_type": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "transferType"
+          },
+          "transaction_version": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "transactionVersion"
+          },
+          "block_time": {
+            "format": "date-time",
+            "type": "string",
+            "description": "block_time"
+          },
+          "timestamp": { "type": "number", "description": "timestamp" },
+          "token_data_id_hash": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "tokenDataIdHash"
+          },
+          "token_amount": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "tokenAmount"
+          },
+          "to_address": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "toAddress"
+          },
+          "name": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "name"
+          },
+          "property_version": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "propertyVersion"
+          },
+          "from_address": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "fromAddress"
+          },
+          "event_sequence_number": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "eventSequenceNumber"
+          },
+          "event_index": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "eventIndex"
+          },
+          "event_creation_number": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "eventCreationNumber"
+          },
+          "event_account_address": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "eventAccountAddress"
+          },
+          "collection_name": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "collectionName"
+          },
+          "collection_data_id_hash": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "collectionDataIdHash"
+          },
+          "coin_type": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "coinType"
+          },
+          "coin_amount": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "coinAmount"
+          },
+          "creator_address": {
+            "type": "string",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "creatorAddress"
+          },
+          "block_height": {
+            "type": "number",
+            "example": "09e63a48047b1c2bc51c0abc4b67ffcd9922e0adc99a6cc36532662172976a4b",
+            "description": "blockHeight"
+          }
+        },
+        "required": [
+          "transfer_type",
+          "transaction_version",
+          "block_time",
+          "timestamp",
+          "token_data_id_hash",
+          "token_amount",
+          "to_address",
+          "name",
+          "property_version",
+          "from_address",
+          "event_sequence_number",
+          "event_index",
+          "event_creation_number",
+          "event_account_address",
+          "collection_name",
+          "collection_data_id_hash",
+          "coin_type",
+          "coin_amount",
+          "creator_address",
+          "block_height"
+        ]
+      },
+      "ListNftActivityResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Nft activities",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BaseNftActivityDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "TransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "blockHeight": {
+            "type": "number",
+            "example": 1,
+            "description": "blockHeight"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-06-14 14:14:42.380",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1,
+            "description": "timestamp"
+          },
+          "version": {
+            "type": "number",
+            "example": 1,
+            "description": "version"
+          },
+          "type": {
+            "type": "string",
+            "example": "block_metadata_transaction",
+            "description": "type"
+          },
+          "hash": {
+            "type": "string",
+            "example": "0xbf3d139d0bbe68f1db6d393b135c2ed12ab5ec1635f08b26994180d1e6434dd1",
+            "description": "hash"
+          },
+          "sender": {
+            "type": "string",
+            "example": "0xe0a2Bd4258D2768837BAa26A28fE71Dc079f84c7",
+            "description": "sender"
+          },
+          "sentTo": {
+            "type": "string",
+            "example": "0x8b24Eb4E6aAe906058242D83e51fB077370c4720",
+            "description": "sentTo"
+          },
+          "function": {
+            "type": "string",
+            "example": "function",
+            "description": "function"
+          },
+          "amount": { "type": "number", "example": 1, "description": "amount" },
+          "gas": { "type": "number", "example": 1, "description": "gas" },
+          "logs": {
+            "description": "The logs of the transaction",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogResponseDto" }
+          }
+        },
+        "required": [
+          "blockHeight",
+          "blockTime",
+          "timestamp",
+          "version",
+          "type",
+          "hash",
+          "sender",
+          "sentTo",
+          "function",
+          "amount",
+          "gas",
+          "logs"
+        ]
+      },
+      "ListTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TransactionResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "TxPayloadResponseDto": {
+        "type": "object",
+        "properties": {
+          "blockHeight": {
+            "type": "number",
+            "example": 1,
+            "description": "blockHeight"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-06-14 14:14:42.380",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1,
+            "description": "timestamp"
+          },
+          "txVersion": {
+            "type": "number",
+            "example": 1,
+            "description": "txVersion"
+          },
+          "txType": {
+            "type": "string",
+            "example": "block_metadata_transaction",
+            "description": "txType"
+          },
+          "txHash": {
+            "type": "string",
+            "example": "0xbf3d139d0bbe68f1db6d393b135c2ed12ab5ec1635f08b26994180d1e6434dd1",
+            "description": "txHash"
+          },
+          "function": {
+            "type": "string",
+            "example": "function",
+            "description": "function"
+          },
+          "typeArguments": {
+            "type": "string",
+            "example": "[\"0x1::aptos_coin::AptosCoin\"]",
+            "description": "typeArguments"
+          },
+          "arguments": {
+            "type": "string",
+            "example": "[\"1000\", \"10\"]",
+            "description": "arguments"
+          }
+        },
+        "required": [
+          "blockHeight",
+          "blockTime",
+          "timestamp",
+          "txVersion",
+          "txType",
+          "txHash",
+          "function",
+          "typeArguments",
+          "arguments"
+        ]
+      },
+      "ListTxPayloadResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TxPayloadResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "TxSignatureResponseDto": {
+        "type": "object",
+        "properties": {
+          "blockHeight": {
+            "type": "number",
+            "example": 1,
+            "description": "blockHeight"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-06-14 14:14:42.380",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1,
+            "description": "timestamp"
+          },
+          "txVersion": {
+            "type": "number",
+            "example": 1,
+            "description": "txVersion"
+          },
+          "txType": {
+            "type": "string",
+            "example": "block_metadata_transaction",
+            "description": "txType"
+          },
+          "txHash": {
+            "type": "string",
+            "example": "0xbf3d139d0bbe68f1db6d393b135c2ed12ab5ec1635f08b26994180d1e6434dd1",
+            "description": "txHash"
+          },
+          "type": {
+            "type": "string",
+            "example": "ed25519_signature",
+            "description": "type"
+          },
+          "publicKey": {
+            "type": "string",
+            "example": "key",
+            "description": "publicKey"
+          },
+          "signature": {
+            "type": "string",
+            "example": "0x5f93f5019c612b6cb59d1649b7f363f108ab37b3ebfdc76ed59c841b1451e3f1b22d502f2c4e597b1bbd39396ab9e42e0dc68463971465c3c45bf880c08f5007",
+            "description": "signature"
+          }
+        },
+        "required": [
+          "blockHeight",
+          "blockTime",
+          "timestamp",
+          "txVersion",
+          "txType",
+          "txHash",
+          "type",
+          "publicKey",
+          "signature"
+        ]
+      },
+      "ListTxSignatureResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TxSignatureResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "TxChangeResponseDto": {
+        "type": "object",
+        "properties": {
+          "blockHeight": {
+            "type": "number",
+            "example": 1,
+            "description": "blockHeight"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-06-14 14:14:42.380",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1,
+            "description": "timestamp"
+          },
+          "txVersion": {
+            "type": "number",
+            "example": 1,
+            "description": "txVersion"
+          },
+          "txType": {
+            "type": "string",
+            "example": "block_metadata_transaction",
+            "description": "txType"
+          },
+          "txHash": {
+            "type": "string",
+            "example": "0xbf3d139d0bbe68f1db6d393b135c2ed12ab5ec1635f08b26994180d1e6434dd1",
+            "description": "txHash"
+          },
+          "type": {
+            "type": "string",
+            "example": "write_resource",
+            "description": "type"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x1",
+            "description": "address"
+          },
+          "stateKeyHash": {
+            "type": "string",
+            "example": "0x7b1615bf012d3c94223f3f76287ee2f7bdf31d364071128b256aeff0841b626d",
+            "description": "stateKeyHash"
+          },
+          "module": {
+            "type": "string",
+            "example": "module",
+            "description": "module"
+          }
+        },
+        "required": [
+          "blockHeight",
+          "blockTime",
+          "timestamp",
+          "txVersion",
+          "txType",
+          "txHash",
+          "type",
+          "address",
+          "stateKeyHash",
+          "module"
+        ]
+      },
+      "ListTxChangeResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TxChangeResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "CoinResponseDto": {
+        "type": "object",
+        "properties": {
+          "coinType": {
+            "type": "string",
+            "example": "0x1::aptos_coin::AptosCoin",
+            "description": "coinType"
+          },
+          "coinTypeHash": {
+            "type": "string",
+            "example": "91ceb1308a98389691e05158b07ed5f079ab78461a6bb8d5a4054b1bb5cb8bb6",
+            "description": "coinTypeHash"
+          },
+          "creatorAddress": {
+            "type": "string",
+            "example": "0x1",
+            "description": "creatorAddress"
+          },
+          "name": {
+            "type": "string",
+            "example": "Aptos Coin",
+            "description": "name"
+          },
+          "decimals": {
+            "type": "number",
+            "example": 4,
+            "description": "decimals"
+          },
+          "supplyAggreatorTableHandle": {
+            "type": "string",
+            "example": "0x1b854694ae746cdbd8d44186ca4929b2b337df21d1c74633be19b2710552fdca",
+            "description": "supplyAggreatorTableHandle"
+          },
+          "supplyAggreatorTableKey": {
+            "type": "string",
+            "example": "0x619dc29a0aac8fa146714058e8dd6d2d0f3bdf5f6331907bf91f3acd81e6935",
+            "description": "supplyAggreatorTableKey"
+          },
+          "symbol": {
+            "type": "string",
+            "example": "APT",
+            "description": "symbol"
+          },
+          "transactionCreatedTimestamp": {
+            "type": "number",
+            "example": 1665740256504239,
+            "description": "transactionCreatedTimestamp"
+          },
+          "transactionVersionCreated": {
+            "type": "number",
+            "example": 1665740256504239,
+            "description": "transactionVersionCreated"
+          }
+        },
+        "required": [
+          "coinType",
+          "coinTypeHash",
+          "creatorAddress",
+          "name",
+          "decimals",
+          "supplyAggreatorTableHandle",
+          "supplyAggreatorTableKey",
+          "symbol",
+          "transactionCreatedTimestamp",
+          "transactionVersionCreated"
+        ]
+      },
+      "ListCoinResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CoinResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "CoinActivityResponseDto": {
+        "type": "object",
+        "properties": {
+          "transactionVersion": {
+            "type": "number",
+            "example": 46292538,
+            "description": "transactionVersion"
+          },
+          "eventIndex": {
+            "type": "number",
+            "example": 1,
+            "description": "eventIndex"
+          },
+          "amount": {
+            "type": "number",
+            "example": 1500000000,
+            "description": "amount"
+          },
+          "blockHeight": {
+            "type": "number",
+            "example": 15747799,
+            "description": "blockHeight"
+          },
+          "coinType": {
+            "type": "string",
+            "example": "0x6de517a18f003625e7fba9b9dc29b310f2e3026bbeb1997b3ada9de1e3cec8d6::opc::OPC",
+            "description": "coinType"
+          },
+          "activityType": {
+            "type": "string",
+            "example": "0x1::coin::DepositEvent",
+            "description": "activityType"
+          },
+          "entryFunctionIdStr": {
+            "type": "string",
+            "example": "0x6de517a18f003625e7fba9b9dc29b310f2e3026bbeb1997b3ada9de1e3cec8d6::opc::transfer",
+            "description": "entryFunctionIdStr"
+          },
+          "eventAccountAddress": {
+            "type": "string",
+            "example": "0x673afeeb37ccba25508b82d3647876446e177de2b71d488c0704e0a0a6ba5711",
+            "description": "eventAccountAddress"
+          },
+          "eventSequenceNumber": {
+            "type": "number",
+            "example": 1,
+            "description": "eventSequenceNumber"
+          },
+          "isGasFee": {
+            "type": "boolean",
+            "example": true,
+            "description": "isGasFee"
+          },
+          "isTransactionSuccess": {
+            "type": "boolean",
+            "example": true,
+            "description": "isTransactionSuccess"
+          },
+          "ownerAddress": {
+            "type": "string",
+            "example": "0x673afeeb37ccba25508b82d3647876446e177de2b71d488c0704e0a0a6ba5711",
+            "description": "ownerAddress"
+          },
+          "blockTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-06-19 23:25:05.006",
+            "description": "blockTime"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1,
+            "description": "timestamp"
+          },
+          "eventCreationNumber": {
+            "type": "number",
+            "example": 2,
+            "description": "eventCreationNumber"
+          }
+        },
+        "required": [
+          "transactionVersion",
+          "eventIndex",
+          "amount",
+          "blockHeight",
+          "coinType",
+          "activityType",
+          "entryFunctionIdStr",
+          "eventAccountAddress",
+          "eventSequenceNumber",
+          "isGasFee",
+          "isTransactionSuccess",
+          "ownerAddress",
+          "blockTime",
+          "timestamp",
+          "eventCreationNumber"
+        ]
+      },
+      "ListCoinActivityResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CoinActivityResponseDto" }
+          }
+        },
+        "required": ["data"]
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+  }
+}

@@ -1,0 +1,1758 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/nft": {
+      "get": {
+        "operationId": "sui_getNfts",
+        "summary": "Get NFTs",
+        "description": "Get NFTs",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNFTResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/nft/collections": {
+      "get": {
+        "operationId": "sui_getCollections",
+        "summary": "Get collections",
+        "description": "Get collections",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftCollectionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT collections"]
+      }
+    },
+    "/v1/nft/collection/{collection}": {
+      "get": {
+        "operationId": "sui_getNftsOfCollections",
+        "summary": "Get NFTs of collections",
+        "description": "Get NFTs of collections",
+        "parameters": [
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "description": "Collection address of NFT transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNFTResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT collections"]
+      }
+    },
+    "/v1/nft/transactions": {
+      "get": {
+        "operationId": "sui_getNftTransactions",
+        "summary": "Get NFT transactions",
+        "description": "Get NFT transactions",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions/block/{checkpoint_sequence_number}": {
+      "get": {
+        "operationId": "sui_getNftTransactionsByBlock",
+        "summary": "Get NFT transactions by block",
+        "description": "Get NFT transactions by block",
+        "parameters": [
+          {
+            "name": "checkpoint_sequence_number",
+            "required": true,
+            "in": "path",
+            "description": "Block number",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions-from-block-to-block": {
+      "get": {
+        "operationId": "sui_getNftTransactionsFromBlockToBlock",
+        "summary": "Get NFT transactions from block to block",
+        "description": "Get NFT transactions from block to block",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions-from-time-to-time": {
+      "get": {
+        "operationId": "sui_getNftTransactionsFromTimeToTime",
+        "summary": "Get NFT transactions from time to time",
+        "description": "Get NFT transactions from time to time",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions/collection/{collection}": {
+      "get": {
+        "operationId": "sui_getNftTransactionsOfCollection",
+        "summary": "Get NFT transactions of collection",
+        "description": "Get NFT transactions of collection",
+        "parameters": [
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "description": "Collection address of NFT transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions/collection/{collection}/{checkpoint_sequence_number}": {
+      "get": {
+        "operationId": "sui_getNftTransactionsOfCollectionByBlock",
+        "summary": "Get NFT transactions of collection by block",
+        "description": "Get NFT transactions of collection by block",
+        "parameters": [
+          {
+            "name": "checkpoint_sequence_number",
+            "required": true,
+            "in": "path",
+            "description": "Block number",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "description": "Collection address of NFT transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions-from-block-to-block/{collection}": {
+      "get": {
+        "operationId": "sui_getNftTransactionsOfCollectionFromBlockToBlock",
+        "summary": "Get NFT transactions of collection from block to block",
+        "description": "Get NFT transactions of collection from block to block",
+        "parameters": [
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "description": "Collection address of NFT transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/nft/transactions-from-time-to-time/{collection}": {
+      "get": {
+        "operationId": "sui_getNftTransactionsOfCollectionTimeFromToTime",
+        "summary": "Get NFT transactions of collection from time to time",
+        "description": "Get NFT transactions of collection from time to time",
+        "parameters": [
+          {
+            "name": "collection",
+            "required": true,
+            "in": "path",
+            "description": "Collection address of NFT transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transactions"]
+      }
+    },
+    "/v1/transaction": {
+      "get": {
+        "operationId": "sui_getTransactions",
+        "summary": "Get transactions",
+        "description": "Get transactions",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get transactions"]
+      }
+    },
+    "/v1/transaction/hash/{digest}": {
+      "get": {
+        "operationId": "sui_getTransactionByHash",
+        "summary": "Get transaction by hash",
+        "description": "Get transaction by hash",
+        "parameters": [
+          {
+            "name": "digest",
+            "required": true,
+            "in": "path",
+            "example": "0x3d6122660cc824376f11ee842f83addc3525e2dd6756b9bcf0affa6aa88cf741",
+            "description": "Block hash.",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get transactions"]
+      }
+    },
+    "/v1/transaction/block/{checkpoint}": {
+      "get": {
+        "operationId": "sui_getTransactionsByBlock",
+        "summary": "Get transactions by block",
+        "description": "Get transactions by block",
+        "parameters": [
+          {
+            "name": "checkpoint",
+            "required": true,
+            "in": "path",
+            "example": "235463",
+            "description": "Block number.",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get transactions"]
+      }
+    },
+    "/v1/transaction/from-block-to-block": {
+      "get": {
+        "operationId": "sui_getTransactionsFromBlockToBlock",
+        "summary": "Get transactions from block to block",
+        "description": "Get transactions from block to block",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get transactions"]
+      }
+    },
+    "/v1/transaction/from-time-to-time": {
+      "get": {
+        "operationId": "sui_getTransactionsFromTimeToTime",
+        "summary": "Get transactions from time to time",
+        "description": "Get transactions from time to time",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get transactions"]
+      }
+    },
+    "/v1/block": {
+      "get": {
+        "operationId": "sui_getBlocks",
+        "summary": "Get blocks",
+        "description": "Get blocks",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBlockResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get blocks"]
+      }
+    },
+    "/v1/block/hash/{digest}": {
+      "get": {
+        "operationId": "sui_getABlockByHash",
+        "summary": "Get a block by hash",
+        "description": "Get a block by hash",
+        "parameters": [
+          {
+            "name": "digest",
+            "required": true,
+            "in": "path",
+            "example": "0x3d6122660cc824376f11ee842f83addc3525e2dd6756b9bcf0affa6aa88cf741",
+            "description": "Block hash.",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlockResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get blocks"]
+      }
+    },
+    "/v1/block/block/{sequence_number}": {
+      "get": {
+        "operationId": "sui_getABlockByNumber",
+        "summary": "Get a block by number",
+        "description": "Get a block by number",
+        "parameters": [
+          {
+            "name": "sequence_number",
+            "required": true,
+            "in": "path",
+            "example": "235463",
+            "description": "Block number.",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlockResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get blocks"]
+      }
+    },
+    "/v1/block/from-number-to-number": {
+      "get": {
+        "operationId": "sui_getBlocksFromNumberToNumber",
+        "summary": "Get blocks from number to number",
+        "description": "Get blocks from number to number",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBlockResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get blocks"]
+      }
+    },
+    "/v1/block/from-time-to-time": {
+      "get": {
+        "operationId": "sui_getBlocksTimeFromToTime",
+        "summary": "Get blocks from time to time",
+        "description": "Get blocks from time to time",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBlockResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get blocks"]
+      }
+    },
+    "/v1/token": {
+      "get": {
+        "operationId": "sui_getCoins",
+        "summary": "Get coins",
+        "description": "Get coins",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListCoinResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coins"]
+      }
+    },
+    "/v1/token/transactions": {
+      "get": {
+        "operationId": "sui_getCoinTransactions",
+        "summary": "Get coin transactions",
+        "description": "Get coin transactions",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions/block/{checkpoint_sequence_number}": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsByBlock",
+        "summary": "Get coin transactions by block",
+        "description": "Get coin transactions by block",
+        "parameters": [
+          {
+            "name": "checkpoint_sequence_number",
+            "required": true,
+            "in": "path",
+            "description": "Block number",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions-from-block-to-block": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsFromBlockToBlock",
+        "summary": "Get coin transactions from block to block",
+        "description": "Get coin transactions from block to block",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions-from-time-to-time": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsFromTimeToTime",
+        "summary": "Get coin transactions from time to time",
+        "description": "Get coin transactions from time to time",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions/type/{type}": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsOfType",
+        "summary": "Get coin transactions of type",
+        "description": "Get coin transactions of type",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "description": "The type of coin transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions/type/{type}/{checkpoint_sequence_number}": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsOfTypeByBlock",
+        "summary": "Get coin transactions of type by block",
+        "description": "Get coin transactions of type by block",
+        "parameters": [
+          {
+            "name": "checkpoint_sequence_number",
+            "required": true,
+            "in": "path",
+            "description": "Block number",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "description": "The type of coin transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListCoinResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions-from-block-to-block/{type}": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsOfTpeFromBlockToBlock",
+        "summary": "Get coin transactions of type from block to block",
+        "description": "Get coin transactions of type from block to block",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "description": "The type of coin transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    },
+    "/v1/token/transactions-from-time-to-time/{type}": {
+      "get": {
+        "operationId": "sui_getCoinTransactionsOfTypeTimeFromToTime",
+        "summary": "Get coin transactions of type from time to time",
+        "description": "Get coin transactions of type from time to time",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "description": "The type of coin transaction",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of item displayed per page, default: 10",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of skipped item per page, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCoinTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get coin transactions"]
+      }
+    }
+  },
+  "info": {
+    "title": "SUI APIs",
+    "description": "Swagger documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "https://sui-mainnet-api.blocklens.io",
+      "description": "Sui production server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" },
+      "basic": { "type": "http", "scheme": "basic" },
+      "apiKey": { "type": "apiKey", "name": "x-api-key", "in": "header" }
+    },
+    "schemas": {
+      "NFTResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "packageId": { "type": "string" },
+          "collection": { "type": "string" },
+          "name": {
+            "type": "string",
+            "description": "The name or title of the NFT"
+          },
+          "description": {
+            "type": "string",
+            "description": "A detailed description of the NFT"
+          },
+          "owner": {
+            "type": "string",
+            "description": "The wallet address of the owner of the NFT"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "The URL of the NFT's image"
+          },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        },
+        "required": [
+          "id",
+          "packageId",
+          "collection",
+          "name",
+          "description",
+          "owner",
+          "imageUrl",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ListNFTResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NFTResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "NftCollection": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "packageId": { "type": "string" },
+          "name": {
+            "type": "string",
+            "description": "The name or title of the collection"
+          },
+          "creator": {
+            "type": "string",
+            "description": "address create collection"
+          },
+          "imageUrl": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        },
+        "required": [
+          "id",
+          "packageId",
+          "name",
+          "creator",
+          "imageUrl",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ListNftCollectionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NftCollection" }
+          }
+        },
+        "required": ["data"]
+      },
+      "NftTransactionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "digest": { "type": "string" },
+          "nftId": { "type": "string" },
+          "collection": { "type": "string" },
+          "status": { "type": "string" },
+          "sender": { "type": "string" },
+          "type": { "type": "string" },
+          "gasFee": { "type": "number" },
+          "timestamp": { "type": "number" },
+          "checkpoint": { "type": "number" },
+          "txNumber": { "type": "number" },
+          "totalGasFee": { "type": "number" },
+          "function": { "type": "string" },
+          "computationFee": { "type": "number" },
+          "storageFee": { "type": "number" },
+          "storageRebate": { "type": "number" },
+          "gasBudget": { "type": "number" },
+          "gasPrice": { "type": "number" },
+          "packageId": { "type": "string" },
+          "blockTime": { "type": "number" }
+        },
+        "required": [
+          "digest",
+          "nftId",
+          "collection",
+          "status",
+          "sender",
+          "type",
+          "gasFee",
+          "timestamp",
+          "checkpoint",
+          "txNumber",
+          "totalGasFee",
+          "function",
+          "computationFee",
+          "storageFee",
+          "storageRebate",
+          "gasBudget",
+          "gasPrice",
+          "packageId",
+          "blockTime"
+        ]
+      },
+      "ListNftTransactionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NftTransactionsResponseDto"
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "TransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "digest": { "type": "string" },
+          "timestamp": { "type": "number" },
+          "checkpoint": { "type": "number" },
+          "transaction": { "type": "object" },
+          "effects": { "type": "object" },
+          "events": { "type": "object" },
+          "objectChanges": { "type": "object" },
+          "balanceChanges": { "type": "object" },
+          "blockTime": { "type": "number" }
+        },
+        "required": [
+          "digest",
+          "timestamp",
+          "checkpoint",
+          "transaction",
+          "effects",
+          "events",
+          "objectChanges",
+          "balanceChanges",
+          "blockTime"
+        ]
+      },
+      "ListTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TransactionResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "BlockResponseDto": {
+        "type": "object",
+        "properties": {
+          "digest": { "type": "string", "description": "Checkpoint digest" },
+          "timestamp": {
+            "type": "number",
+            "description": "Timestamp of the checkpoint - number of milliseconds from the Unix epoch Checkpoint timestamps are monotonic, but not strongly monotonic - subsequent checkpoints can have same timestamp if they originate from the same underlining consensus commit"
+          },
+          "epoch": { "type": "number", "description": "Checkpoint's epoch ID" },
+          "sequenceNumber": {
+            "type": "number",
+            "description": "Checkpoint sequence number"
+          },
+          "networkTotalTransactions": {
+            "type": "number",
+            "description": "Total number of transactions committed since genesis, including those in this checkpoint."
+          },
+          "numberTxBlocks": {
+            "type": "number",
+            "description": "Total transaction block"
+          },
+          "previousDigest": {
+            "type": "string",
+            "description": "Digest of the previous checkpoint"
+          },
+          "epochRollingGasCostSummary": {
+            "type": "string",
+            "description": "The running total gas costs of all transactions included in the current epoch so far until this checkpoint."
+          },
+          "transactions": {
+            "description": "Transaction digests",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "checkpointCommitments": {
+            "type": "string",
+            "description": "Commitments to checkpoint state"
+          },
+          "validatorSignature": {
+            "type": "string",
+            "description": "Validator Signature"
+          },
+          "storageCost": { "type": "number" },
+          "storageRebate": { "type": "number" },
+          "computationCost": { "type": "number" },
+          "nonRefundableStorageFee": { "type": "number" },
+          "blockTime": { "type": "number" }
+        },
+        "required": [
+          "digest",
+          "timestamp",
+          "epoch",
+          "sequenceNumber",
+          "networkTotalTransactions",
+          "numberTxBlocks",
+          "previousDigest",
+          "epochRollingGasCostSummary",
+          "transactions",
+          "checkpointCommitments",
+          "validatorSignature",
+          "storageCost",
+          "storageRebate",
+          "computationCost",
+          "nonRefundableStorageFee",
+          "blockTime"
+        ]
+      },
+      "ListBlockResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BlockResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "CoinResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "metadata": { "type": "string" },
+          "treasury": { "type": "string" },
+          "name": {
+            "type": "string",
+            "description": "The name or title of the coin"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the token"
+          },
+          "decimals": {
+            "type": "string",
+            "description": "The decimals of the token"
+          },
+          "description": { "type": "string" },
+          "iconUrl": { "type": "string" },
+          "totalSupply": { "type": "string" },
+          "packageId": { "type": "string" },
+          "creator": { "type": "string" },
+          "createdAt": { "type": "number" },
+          "updatedAt": { "type": "number" },
+          "blockTime": { "type": "number" }
+        },
+        "required": [
+          "id",
+          "metadata",
+          "treasury",
+          "name",
+          "symbol",
+          "decimals",
+          "description",
+          "iconUrl",
+          "totalSupply",
+          "packageId",
+          "creator",
+          "createdAt",
+          "updatedAt",
+          "blockTime"
+        ]
+      },
+      "ListCoinResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CoinResponseDto" }
+          }
+        },
+        "required": ["data"]
+      },
+      "CoinTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "digest": { "type": "string" },
+          "coinType": { "type": "string" },
+          "status": { "type": "string" },
+          "type": { "type": "string" },
+          "sender": { "type": "string" },
+          "timestamp": { "type": "number" },
+          "checkpoint": { "type": "number" },
+          "txNumber": { "type": "number" },
+          "totalGasFee": { "type": "number" },
+          "function": { "type": "string" },
+          "computationFee": { "type": "number" },
+          "storageFee": { "type": "number" },
+          "storageRebate": { "type": "number" },
+          "gasBudget": { "type": "number" },
+          "gasPrice": { "type": "number" },
+          "packageId": { "type": "string" },
+          "blockTime": { "type": "number" }
+        },
+        "required": [
+          "digest",
+          "coinType",
+          "status",
+          "type",
+          "sender",
+          "timestamp",
+          "checkpoint",
+          "txNumber",
+          "totalGasFee",
+          "function",
+          "computationFee",
+          "storageFee",
+          "storageRebate",
+          "gasBudget",
+          "gasPrice",
+          "packageId",
+          "blockTime"
+        ]
+      },
+      "ListCoinTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CoinTransactionResponseDto"
+            }
+          }
+        },
+        "required": ["data"]
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+  }
+}

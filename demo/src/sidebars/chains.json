@@ -1,0 +1,17 @@
+[
+  {
+    "chain": "evm",
+    "label": "EVM",
+    "baseUrl": "/category/evm-api"
+  },
+  {
+    "chain": "aptos",
+    "label": "APTOS",
+    "baseUrl": "/category/aptos-api"
+  },
+  {
+    "chain": "sui",
+    "label": "SUI",
+    "baseUrl": "/category/sui-api"
+  }
+]

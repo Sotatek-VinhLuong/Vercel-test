@@ -1,0 +1,5257 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/block": {
+      "get": {
+        "operationId": "evm_blocks",
+        "summary": "Get blocks",
+        "description": "Get blocks.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the blocks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBlockResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/blockFromNumToNum": {
+      "get": {
+        "operationId": "evm_blockFromNumToNum",
+        "summary": "Get blocks from number to number",
+        "description": "Get blocks from number to number.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListBlockResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/blockFromTimeToTime": {
+      "get": {
+        "operationId": "evm_blockFromTimeToTime",
+        "summary": "Get blocks from time to time",
+        "description": "Get blocks from time to time.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListBlockResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/blockHashToBLock/{block_hash}": {
+      "get": {
+        "operationId": "evm_getBlockByHash",
+        "summary": "Get block by block hash",
+        "description": "Get the contents of a block given the block hash.",
+        "parameters": [
+          {
+            "name": "block_hash",
+            "required": true,
+            "in": "path",
+            "example": "0x3d6122660cc824376f11ee842f83addc3525e2dd6756b9bcf0affa6aa88cf741",
+            "description": "Block hash.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "example": "",
+            "description": "If the result should contain the internal transactions.",
+            "schema": {
+              "enum": ["", "internal_transactions"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BaseBlockDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/block/blockNumberToBLock/{block_number}": {
+      "get": {
+        "operationId": "evm_getBlockByNumber",
+        "summary": "Get block by block number",
+        "description": "Get the contents of a block given the block numbers.",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "path",
+            "example": "235463",
+            "description": "Block number.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "example": "",
+            "description": "If the result should contain the internal transactions.",
+            "schema": {
+              "enum": ["", "internal_transactions"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BaseBlockDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get blocks"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/internal-tx/internalTxFromBlockToBlock": {
+      "get": {
+        "operationId": "evm_internalTxFromBlockToBlock",
+        "summary": "Get internal transactions from block to block",
+        "description": "Returns the list of internal transactions performed within a block range, with optional pagination.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListInternalTxResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get internals transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/internal-tx/internalTxFromTimeToTime": {
+      "get": {
+        "operationId": "evm_internalTxFromTimeToTime",
+        "summary": "Get transactions from time to time",
+        "description": "Get transactions from time to time.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListInternalTxResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get internals transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/internal-tx/blockToTransactions/{block_number}": {
+      "get": {
+        "operationId": "evm_getInternalTxByBlockNumber",
+        "summary": "Get a transaction by block number",
+        "description": "Return transactions of block number.",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InternalTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get internals transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/internal-tx/{transaction_hash}": {
+      "get": {
+        "operationId": "evm_getInternalTxByTxHash",
+        "summary": "Get internal transactions by transaction hash",
+        "description": "Return internal transactions of a transaction hash.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListInternalTxResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get internals transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions": {
+      "get": {
+        "operationId": "evm_transactions",
+        "summary": "Get transactions",
+        "description": "Get transactions.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/txFromBlockToBlock": {
+      "get": {
+        "operationId": "evm_txFromBlockToBlock",
+        "summary": "Get transactions from block to block",
+        "description": "Get transactions from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/txFromTimeToTime": {
+      "get": {
+        "operationId": "evm_txFromTimeToTime",
+        "summary": "Get transactions from time to time",
+        "description": "Get transactions from time to time.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/{transaction_hash}": {
+      "get": {
+        "operationId": "evm_getTransactionByTxHash",
+        "summary": "Get a transaction by hash",
+        "description": "Return transactions of hash.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/transactions/blockToTransactions/{block_number}": {
+      "get": {
+        "operationId": "evm_getTransactionByBlockNumber",
+        "summary": "Get a transaction by block number",
+        "description": "Return transactions of block number.",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-tx/decodedTxFromBlockToBlock": {
+      "get": {
+        "operationId": "evm_decodedTxFromBlockToBlock",
+        "summary": "Get internal transactions from block to block",
+        "description": "Returns the list of internal transactions performed within a block range, with optional pagination.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListDecodedTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-tx/decodedTxFromTimeToTime": {
+      "get": {
+        "operationId": "evm_decodedTxFromTimeToTime",
+        "summary": "Get transactions from time to time",
+        "description": "Get transactions from time to time.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the block number and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListDecodedTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-tx/{transaction_hash}": {
+      "get": {
+        "operationId": "evm_getDecodedTxByTxHash",
+        "summary": "Get decoded transactions by transaction hash",
+        "description": "Return decoded transactions of a transaction hash.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DecodedTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-tx/blockToDecodedTransactions/{block_number}": {
+      "get": {
+        "operationId": "evm_getDecodedTxByBlockNumber",
+        "summary": "Get a transaction by block number",
+        "description": "Return transactions of block number.",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DecodedTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-tx/decodeTransaction/{transaction_hash}": {
+      "post": {
+        "operationId": "evm_decodeTransaction",
+        "summary": "Decode transaction",
+        "description": "Return decoded transaction.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/DecodeTransactionDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DecodedTransactionResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded transactions"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event": {
+      "get": {
+        "operationId": "evm_events",
+        "summary": "Get events",
+        "description": "Get events.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the events and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/eventFromBlockToBlock": {
+      "get": {
+        "operationId": "evm_eventFromBlockToBlock",
+        "summary": "Get events from block to block",
+        "description": "Get events from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the events and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/eventFromTimeToTime": {
+      "get": {
+        "operationId": "evm_eventFromTimeToTime",
+        "summary": "Get events from time to time",
+        "description": "Get events from time to time.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the events and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ListLogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/{transaction_hash}": {
+      "get": {
+        "operationId": "evm_getEventsByTxHash",
+        "summary": "Get events by transaction",
+        "description": "Return events of a transaction.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/event/blockToEvents/{block_number}": {
+      "get": {
+        "operationId": "evm_getEventsByBlockNumber",
+        "summary": "Get events by block number",
+        "description": "Return events of block number.",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LogResponseDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-event": {
+      "get": {
+        "operationId": "evm_decodedEvents",
+        "summary": "Get decoded events",
+        "description": "Get decoded events.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the decoded events and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListDecodedLogResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-event/decodedEventFromBlockToBlock": {
+      "get": {
+        "operationId": "evm_decodedEventFromBlockToBlock",
+        "summary": "Get decoded events from block to block",
+        "description": "Get decoded events from block to block.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the decoded events and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListDecodedLogResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-event/decodedEventFromTimeToTime": {
+      "get": {
+        "operationId": "evm_decodedEventFromTimeToTime",
+        "summary": "Get decoded events from time to time",
+        "description": "Get decoded events from time to time.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 Returns the decoded events and corresponding date and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListDecodedLogResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-event/{transaction_hash}": {
+      "get": {
+        "operationId": "evm_getDecodedEventsByTxHash",
+        "summary": "Get decoded events by transaction",
+        "description": "Return decoded events of a transaction.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DecodedLogResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-event/blockToDecodedEvents/{block_number}": {
+      "get": {
+        "operationId": "evm_getDecodedEventsByBlockNumber",
+        "summary": "Get decoded events by block number",
+        "description": "Return decoded events of block number.",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DecodedLogResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/decoded-event/decodeLog/{transaction_hash}": {
+      "post": {
+        "operationId": "evm_decodeLogWithAbi",
+        "summary": "Decode event with abi",
+        "description": "Return event decoded with abi.",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/DecodeLogDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DecodedLogResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get decoded events"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/collections/sync-metadata": {
+      "post": {
+        "operationId": "evm_syncCollectionMetadata",
+        "summary": "Sync collection metadata",
+        "description": "Sync collection metadata",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncCollectionMetadataDto"
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Successful" } },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/collections": {
+      "get": {
+        "operationId": "evm_getCollections",
+        "summary": "Get Collections",
+        "description": "Get list collections.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftCollectionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT collections"]
+      }
+    },
+    "/v1/collections/metadata": {
+      "get": {
+        "operationId": "evm_getCollectionMetadata",
+        "summary": "Get Collection Metadata",
+        "description": "Get collection metadata.",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "collection address",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NftCollection" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT collections"]
+      }
+    },
+    "/v1/collections/{collection_address}/nfts": {
+      "get": {
+        "operationId": "evm_getNftsOfCollection",
+        "summary": "Get nfts of collection",
+        "description": "Get nfts of collection",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNFTResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/collections/{collection_address}/nft-transfers": {
+      "get": {
+        "operationId": "evm_getNftTransfersOfCollection",
+        "summary": "Get nft transfers of collection",
+        "description": "Get nft transfers of collection",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/collections/{collection_address}/nft-transfers/block": {
+      "get": {
+        "operationId": "evm_getNftTransfersOfCollectionByBlock",
+        "summary": "Get nft transfers of collection by block",
+        "description": "Get nft transfers of collection by block",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "query",
+            "description": "Block number",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/collections/{collection_address}/nft-transfers/block-range": {
+      "get": {
+        "operationId": "evm_getNftTransfersOfCollectionByBlockRange",
+        "summary": "Get nft transfers of collection by block range",
+        "description": "Get nft transfers of collection by block range",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/collections/{collection_address}/nft-transfers/time-range": {
+      "get": {
+        "operationId": "evm_getNftTransfersOfCollectionByTimeRange",
+        "summary": "Get nft transfers of collection by time range",
+        "description": "Get nft transfers of collection by time range",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/collections/{collection_address}/nft-transfers/transaction": {
+      "get": {
+        "operationId": "evm_getNftTransfersOfCollectionByTransaction",
+        "summary": "Get nft transfers of collection by transaction",
+        "description": "Get nft transfers of collection by transaction",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "query",
+            "description": "transaction hash",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/nft-transfers": {
+      "get": {
+        "operationId": "evm_getNftTransfers",
+        "summary": "Get nft transfers",
+        "description": "Get list nft transfers by query.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/nft-transfers/block": {
+      "get": {
+        "operationId": "evm_getNftTransfersByBlock",
+        "summary": "Get nft transfers by block number",
+        "description": "Get nft transfers by block number",
+        "parameters": [
+          {
+            "name": "block_number",
+            "required": true,
+            "in": "query",
+            "description": "Block number",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/nft-transfers/block-range": {
+      "get": {
+        "operationId": "evm_getNftTransfersByBlockRange",
+        "summary": "Get nft transfers by block number range",
+        "description": "Get nft transfers by block number range",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/nft-transfers/transaction": {
+      "get": {
+        "operationId": "evm_getNftTransfersByTransaction",
+        "summary": "Get nft transfers by transaction",
+        "description": "Get nft transfers by transaction",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "required": true,
+            "in": "query",
+            "description": "transaction hash",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/nft-transfers/{token_id}": {
+      "get": {
+        "operationId": "evm_getNftTransfersOfTokenId",
+        "summary": "Get nft transfers of token id",
+        "description": "Get nft transfers of token id",
+        "parameters": [
+          {
+            "name": "token_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftTransfersResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFT transfers"]
+      }
+    },
+    "/v1/nfts/sync-metadata": {
+      "post": {
+        "operationId": "evm_syncNftMetadata",
+        "summary": "Sync NFT metadata",
+        "description": "Sync NFT metadata",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SyncNFTMetadataDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Successful" } },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/nft-owners/nftOwnerByCollection": {
+      "get": {
+        "operationId": "evm_getNFTOwnersByCollection",
+        "summary": "Get NFT owners by by collection.",
+        "description": "Get NFT owners by collection.",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "query",
+            "description": "collection address",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftOwnerResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/nft-owners/nftOwnerByTokenId": {
+      "get": {
+        "operationId": "evm_getNFTOwnerByTokenId",
+        "summary": "Get NFT owner by token id.",
+        "description": "Get NFT owner by token id.",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "query",
+            "description": "Collection address",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "token_ids",
+            "required": true,
+            "in": "query",
+            "description": "Array of token ids",
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftOwnerResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/nft-owners/nftOwnedByAddress": {
+      "get": {
+        "operationId": "evm_getNFTOwnedByAddress",
+        "summary": "Get NFTs owned by address.",
+        "description": "Get NFTs owned by address.",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "User address",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNftOwnerResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/nft-metadata/collection": {
+      "get": {
+        "operationId": "evm_getNFTMetadataByCollection",
+        "summary": "Get NFT metadata by collection.",
+        "description": "Get NFT metadata by collection.",
+        "parameters": [
+          {
+            "name": "collection_address",
+            "required": true,
+            "in": "query",
+            "description": "collection address",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNFTResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/nft-metadata/token-id": {
+      "get": {
+        "operationId": "evm_getNFTMetadataByTokenId",
+        "summary": "Get NFT metadata by token id.",
+        "description": "Get NFT metadata by token id.",
+        "parameters": [
+          {
+            "name": "token_id",
+            "required": true,
+            "in": "query",
+            "description": "token id",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ListNFTResponseDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get NFTs"]
+      }
+    },
+    "/v1/erc20/burns": {
+      "get": {
+        "operationId": "evm_getErc20Burns",
+        "summary": "Get ERC20 token burn",
+        "description": "Get ERC20 token burn.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenBurnResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token burns"]
+      }
+    },
+    "/v1/erc20/burns/block": {
+      "get": {
+        "operationId": "evm_getErc20BurnsByBlock",
+        "summary": "Get ERC20 token burn by block",
+        "description": "Get the token burn for a given block.",
+        "parameters": [
+          {
+            "name": "block",
+            "required": true,
+            "in": "query",
+            "description": "Block numbers",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenBurnResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token burns"]
+      }
+    },
+    "/v1/erc20/burns/block-range": {
+      "get": {
+        "operationId": "evm_getErc20BurnsByBlockRange",
+        "summary": "Get ERC20 token burn by block range",
+        "description": "Get the token burn for given block range.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenBurnResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token burns"]
+      }
+    },
+    "/v1/erc20/burns/time-range": {
+      "get": {
+        "operationId": "evm_getErc20BurnsByTimeRange",
+        "summary": "Get ERC20 token burn by time range",
+        "description": "Get the token burn for given time range.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenBurnResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token burns"]
+      }
+    },
+    "/v1/erc20/burns/transaction": {
+      "get": {
+        "operationId": "evm_getErc20BurnsByTransaction",
+        "summary": "Get ERC20 token burn by transaction",
+        "description": "Get the token burn for given transaction.",
+        "parameters": [
+          {
+            "name": "transaction",
+            "required": true,
+            "in": "query",
+            "description": "Transaction hash",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenBurnResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token burns"]
+      }
+    },
+    "/v1/erc20/metadata": {
+      "get": {
+        "operationId": "evm_getErc20TokenMetadata",
+        "summary": "Get ERC20 token metadata by contract",
+        "description": "Get the metadata for a given token contract address (name, symbol, decimals, logo).",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMetadataResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token metadata"]
+      }
+    },
+    "/v1/erc20/metadata/symbol": {
+      "get": {
+        "operationId": "evm_getErc20MetadataBySymbol",
+        "summary": "Get ERC20 token metadata by symbol",
+        "description": "Get the metadata for a given symbol (name, symbol, decimals, logo).",
+        "parameters": [
+          {
+            "name": "symbol",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMetadataResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token metadata"]
+      }
+    },
+    "/v1/erc20/mints": {
+      "get": {
+        "operationId": "evm_getErc20Mints",
+        "summary": "Get ERC20 token mint",
+        "description": "Get ERC20 token mint.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMintResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token mints"]
+      }
+    },
+    "/v1/erc20/mints/block": {
+      "get": {
+        "operationId": "evm_getErc20MintsByBlock",
+        "summary": "Get ERC20 token mint by block",
+        "description": "Get the token mint for a given block.",
+        "parameters": [
+          {
+            "name": "block",
+            "required": true,
+            "in": "query",
+            "description": "Block numbers",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMintResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token mints"]
+      }
+    },
+    "/v1/erc20/mints/block-range": {
+      "get": {
+        "operationId": "evm_getErc20MintsByBlockRange",
+        "summary": "Get ERC20 token mint by block range",
+        "description": "Get the token mint for given block range.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMintResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token mints"]
+      }
+    },
+    "/v1/erc20/mints/time-range": {
+      "get": {
+        "operationId": "evm_getErc20MintsByTimeRange",
+        "summary": "Get ERC20 token mint by time range",
+        "description": "Get the token mint for given time range.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMintResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token mints"]
+      }
+    },
+    "/v1/erc20/mints/transaction": {
+      "get": {
+        "operationId": "evm_getErc20MintsByTransaction",
+        "summary": "Get ERC20 token mint by transaction",
+        "description": "Get the token mint for given transaction.",
+        "parameters": [
+          {
+            "name": "transaction",
+            "required": true,
+            "in": "query",
+            "description": "Transaction hash",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenMintResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token mints"]
+      }
+    },
+    "/v1/erc20/transfers": {
+      "get": {
+        "operationId": "evm_getErc20Transfers",
+        "summary": "Get ERC20 token transfer",
+        "description": "Get ERC20 token transfer.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token transfers"]
+      }
+    },
+    "/v1/erc20/transfers/block": {
+      "get": {
+        "operationId": "evm_getErc20TransfersByBlock",
+        "summary": "Get ERC20 token transfer by block",
+        "description": "Get the token transfer for a given block.",
+        "parameters": [
+          {
+            "name": "block",
+            "required": true,
+            "in": "query",
+            "description": "Block numbers",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token transfers"]
+      }
+    },
+    "/v1/erc20/transfers/block-range": {
+      "get": {
+        "operationId": "evm_getErc20TransfersByBlockRange",
+        "summary": "Get ERC20 token transfer by block range",
+        "description": "Get the token transfer for given block range.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token transfers"]
+      }
+    },
+    "/v1/erc20/transfers/time-range": {
+      "get": {
+        "operationId": "evm_getErc20TransfersByTimeRange",
+        "summary": "Get ERC20 token transfer by time range",
+        "description": "Get the token transfer for given time range.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token transfers"]
+      }
+    },
+    "/v1/erc20/transfers/transaction": {
+      "get": {
+        "operationId": "evm_getErc20TransfersByTransaction",
+        "summary": "Get ERC20 token transfer by transaction",
+        "description": "Get the token transfer for given transaction.",
+        "parameters": [
+          {
+            "name": "transaction",
+            "required": true,
+            "in": "query",
+            "description": "Transaction hash",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token transfers"]
+      }
+    },
+    "/v1/erc20/approvals": {
+      "get": {
+        "operationId": "evm_getErc20Approvals",
+        "summary": "Get ERC20 token approvals",
+        "description": "Get the token approvals.",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenApprovalResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token approvals"]
+      }
+    },
+    "/v1/erc20/approvals/block": {
+      "get": {
+        "operationId": "evm_getErc20ApprovalsByBlock",
+        "summary": "Get ERC20 token approvals by block",
+        "description": "Get the token approvals for a given block.",
+        "parameters": [
+          {
+            "name": "block",
+            "required": true,
+            "in": "query",
+            "description": "Block numbers",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenApprovalResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token approvals"]
+      }
+    },
+    "/v1/erc20/approvals/block-range": {
+      "get": {
+        "operationId": "evm_getErc20ApprovalsByBlockRange",
+        "summary": "Get ERC20 token approvals by block range",
+        "description": "Get the token approvals for given block range.",
+        "parameters": [
+          {
+            "name": "from_block",
+            "required": true,
+            "in": "query",
+            "description": "The minimum block number from which to get the transfers",
+            "example": 999,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_block",
+            "required": true,
+            "in": "query",
+            "description": "The maximum block number from which to get the transfers",
+            "example": 1000,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenApprovalResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token approvals"]
+      }
+    },
+    "/v1/erc20/approvals/time-range": {
+      "get": {
+        "operationId": "evm_getErc20ApprovalsByTimeRange",
+        "summary": "Get ERC20 token approvals by time range",
+        "description": "Get the token approvals for given time range.",
+        "parameters": [
+          {
+            "name": "from_time",
+            "required": true,
+            "in": "query",
+            "description": "From timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "to_time",
+            "required": true,
+            "in": "query",
+            "description": "To timestamp",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenApprovalResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token approvals"]
+      }
+    },
+    "/v1/erc20/approvals/transaction": {
+      "get": {
+        "operationId": "evm_getErc20ApprovalsByTransaction",
+        "summary": "Get ERC20 token approvals by transaction",
+        "description": "Get the token approvals for given transaction.",
+        "parameters": [
+          {
+            "name": "transaction",
+            "required": true,
+            "in": "query",
+            "description": "Transaction Hash",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ERC20TokenApprovalResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token approvals"]
+      }
+    },
+    "/v1/erc20/balance": {
+      "get": {
+        "operationId": "evm_getErc20TokenBalancesByContractAddress",
+        "summary": "Get ERC20 token balances by contract address",
+        "description": "Get ERC20 token balances by contract address.",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ERC20TokenBalancesResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token balance"]
+      }
+    },
+    "/v1/erc20/balance/symbol": {
+      "get": {
+        "operationId": "evm_getErc20BalanceBySymbol",
+        "summary": "Get ERC20 token balance by symbol",
+        "description": "Get the balance for given symbol.",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number, if pagination is enabled",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "symbol",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ERC20TokenBalancesResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token balance"]
+      }
+    },
+    "/v1/erc20/balance/wallet-address": {
+      "get": {
+        "operationId": "evm_getErc20BalanceByWalletAddress",
+        "summary": "Get ERC20 token balance by wallet address",
+        "description": "Get the balance for given wallet address.",
+        "parameters": [
+          {
+            "name": "wallet_address",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Number of items to skip before returning items, default: 0",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items returned, default: 20",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ERC20TokenBalancesResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "apiKey": [] }],
+        "tags": ["Get token balance"]
+      }
+    },
+    "/v1/balance/{address}": {
+      "get": {
+        "operationId": "evm_getBalance",
+        "summary": "Get native balance by wallet",
+        "description": "Gets the native balance owned by a given network and address.",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BalanceResponseDto" }
+              }
+            }
+          }
+        },
+        "tags": ["Get balances"],
+        "security": [{ "apiKey": [] }]
+      }
+    },
+    "/v1/balance/{address}/portfolio": {
+      "get": {
+        "operationId": "evm_getPortfolio",
+        "summary": "Gets portfolio by wallet",
+        "description": "Gets the portfolio for a given network and address.",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Get balances"],
+        "security": [{ "apiKey": [] }]
+      }
+    }
+  },
+  "info": {
+    "title": "EVM APIs",
+    "description": "Swagger documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "https://eth-mainnet-api.blocklens.io",
+      "description": "Ethereum Mainnet server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" },
+      "basic": { "type": "http", "scheme": "basic" },
+      "apiKey": { "type": "apiKey", "name": "x-api-key", "in": "header" }
+    },
+    "schemas": {
+      "ShortBlockResponseDto": {
+        "type": "object",
+        "properties": {
+          "transaction_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "transactionRoot"
+          },
+          "receipt_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "receiptRoot"
+          },
+          "size": {
+            "type": "number",
+            "example": 500,
+            "description": "The block size"
+          },
+          "difficulty": {
+            "type": "number",
+            "example": 17179869184,
+            "description": "The difficulty of the block"
+          },
+          "total_difficulty": {
+            "type": "number",
+            "example": 17179869184,
+            "description": "The total difficulty"
+          },
+          "uncles": {
+            "example": [],
+            "description": "uncles",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "block": {
+            "type": "number",
+            "example": 9193266,
+            "description": "The block number"
+          },
+          "hash": {
+            "type": "string",
+            "example": "0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3",
+            "description": "hash"
+          },
+          "parent_hash": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "description": "The block hash of the parent block"
+          },
+          "nonce": {
+            "type": "string",
+            "example": "0x0000000000000042",
+            "description": "The nonce"
+          },
+          "sha3Uncles": {
+            "type": "string",
+            "example": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+            "description": "sha3Uncles"
+          },
+          "logs_bloom": {
+            "type": "string",
+            "example": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "description": "logsBloom"
+          },
+          "transactions_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "transactionsRoot"
+          },
+          "state_root": {
+            "type": "string",
+            "example": "0xd7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544",
+            "description": "stateRoot"
+          },
+          "receipts_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "receiptsRoot"
+          },
+          "miner": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000000000",
+            "description": "The address of the miner"
+          },
+          "extra_data": {
+            "type": "string",
+            "example": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
+            "description": "extraData"
+          },
+          "gas_limit": {
+            "type": "number",
+            "example": 5000,
+            "description": "The gas limit"
+          },
+          "gas_used": {
+            "type": "number",
+            "example": 0,
+            "description": "The gas used"
+          },
+          "block_time": {
+            "type": "string",
+            "example": "1970-01-19T12:04:31.492Z",
+            "description": "The block time of the block"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "1687064975",
+            "description": "The timestamp of the block"
+          },
+          "base_fee_per_gas": {
+            "type": "number",
+            "example": 100,
+            "description": "baseFeePerGas"
+          }
+        },
+        "required": [
+          "transaction_root",
+          "receipt_root",
+          "size",
+          "difficulty",
+          "total_difficulty",
+          "uncles",
+          "block",
+          "hash",
+          "parent_hash",
+          "nonce",
+          "sha3Uncles",
+          "logs_bloom",
+          "transactions_root",
+          "state_root",
+          "receipts_root",
+          "miner",
+          "extra_data",
+          "gas_limit",
+          "gas_used",
+          "block_time",
+          "timestamp"
+        ]
+      },
+      "ListBlockResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Blocks",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ShortBlockResponseDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "TxLogResponseDto": {
+        "type": "object",
+        "properties": {
+          "removed": {
+            "type": "boolean",
+            "example": false,
+            "description": "removed"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000001003",
+            "description": "The address of the contract"
+          },
+          "data": {
+            "type": "string",
+            "example": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000",
+            "description": "The data of the log"
+          },
+          "topic0": {
+            "type": "string",
+            "example": "0x5ac9b37d571677b80957ca05693f371526c602fd08042b416a29fdab7efefa49",
+            "description": "topic0"
+          },
+          "topic1": {
+            "type": "string",
+            "example": "0x5ac9b37d571677b80957ca05693f371526c602fd08042b416a29fdab7efefa49",
+            "description": "topic1"
+          },
+          "topic2": {
+            "type": "string",
+            "example": "0x5ac9b37d571677b80957ca05693f371526c602fd08042b416a29fdab7efefa49",
+            "description": "topic2"
+          },
+          "topic3": {
+            "type": "string",
+            "example": "0x5ac9b37d571677b80957ca05693f371526c602fd08042b416a29fdab7efefa49",
+            "description": "topic3"
+          },
+          "log_index": {
+            "type": "number",
+            "example": 0,
+            "description": "logIndex"
+          },
+          "transaction_index": {
+            "type": "number",
+            "example": 2,
+            "description": "transactionIndex"
+          },
+          "transaction_hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "The hash of the transaction"
+          },
+          "block_hash": {
+            "type": "string",
+            "example": "0xd0bc67b50915467ada963c35ee00950f664788e47da8139d8c178653171034f1",
+            "description": "The hash of the block"
+          },
+          "block_number": {
+            "type": "number",
+            "example": 1,
+            "description": "The block number"
+          },
+          "block_timestamp": {
+            "type": "number",
+            "description": "The block timestamp"
+          }
+        },
+        "required": [
+          "removed",
+          "address",
+          "data",
+          "topic0",
+          "topic1",
+          "topic2",
+          "topic3",
+          "log_index",
+          "transaction_index",
+          "transaction_hash",
+          "block_hash",
+          "block_number",
+          "block_timestamp"
+        ]
+      },
+      "InternalTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "The hash of the transaction"
+          },
+          "from": {
+            "type": "string",
+            "example": "0x35552c16704d214347f29fa77f77da6d75d7c752",
+            "description": "The sender"
+          },
+          "to": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000001003",
+            "description": "The recipient"
+          },
+          "input": { "type": "string", "description": "The input" },
+          "output": {
+            "type": "string",
+            "example": "",
+            "description": "The output"
+          },
+          "value": {
+            "type": "string",
+            "example": "0",
+            "description": "The value that was transferred (in wei)"
+          },
+          "gas": {
+            "type": "string",
+            "example": "209665",
+            "description": "he gas of the transaction"
+          },
+          "timestamp": {
+            "type": "number",
+            "description": "The block timestamp"
+          },
+          "block_time": { "type": "number", "description": "The block time" },
+          "block_hash": {
+            "type": "string",
+            "example": "0xd0bc67b50915467ada963c35ee00950f664788e47da8139d8c178653171034f1",
+            "description": "blockHash"
+          },
+          "block_number": {
+            "type": "number",
+            "example": 1,
+            "description": "blockNumber"
+          },
+          "type": {
+            "type": "string",
+            "example": "STATICCALL",
+            "description": "Call type"
+          },
+          "parent_tx_hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "The hash of the parent transaction"
+          },
+          "gas_used": {
+            "type": "number",
+            "example": 901693,
+            "description": "receiptGasUsed"
+          },
+          "status": {
+            "type": "boolean",
+            "example": true,
+            "description": "status"
+          },
+          "trace_id": {
+            "type": "string",
+            "example": "0_1_1",
+            "description": "traceId"
+          },
+          "error": {
+            "type": "string",
+            "example": 901693,
+            "description": "error"
+          }
+        },
+        "required": [
+          "hash",
+          "from",
+          "to",
+          "input",
+          "output",
+          "value",
+          "gas",
+          "timestamp",
+          "block_time",
+          "block_hash",
+          "block_number",
+          "type",
+          "parent_tx_hash",
+          "gas_used",
+          "status",
+          "trace_id",
+          "error"
+        ]
+      },
+      "TransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "The hash of the transaction"
+          },
+          "transaction_index": {
+            "type": "number",
+            "example": 1,
+            "description": "The transaction index"
+          },
+          "from": {
+            "type": "string",
+            "example": "0x35552c16704d214347f29fa77f77da6d75d7c752",
+            "description": "The sender"
+          },
+          "to": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000001003",
+            "description": "The recipient"
+          },
+          "receipt_contract_address": {
+            "type": "string",
+            "example": null,
+            "description": "receiptContractAddress"
+          },
+          "receipt_cumulative_gas_used": {
+            "type": "number",
+            "example": 901693,
+            "description": "cumulativeGasUsed"
+          },
+          "receipt_gas_used": {
+            "type": "number",
+            "example": 901693,
+            "description": "receiptGasUsed"
+          },
+          "input": { "type": "string", "description": "The input" },
+          "output": {
+            "type": "string",
+            "example": "",
+            "description": "The output"
+          },
+          "value": {
+            "type": "string",
+            "example": "0",
+            "description": "The value that was transferred (in wei)"
+          },
+          "nonce": {
+            "type": "number",
+            "example": 1,
+            "description": "The nonce"
+          },
+          "gas_price": { "type": "string", "description": "The gas price" },
+          "gas": {
+            "type": "string",
+            "example": "209665",
+            "description": "he gas of the transaction"
+          },
+          "timestamp": {
+            "type": "number",
+            "description": "The block timestamp"
+          },
+          "block_time": { "type": "number", "description": "The block time" },
+          "block_hash": {
+            "type": "string",
+            "example": "0xd0bc67b50915467ada963c35ee00950f664788e47da8139d8c178653171034f1",
+            "description": "blockHash"
+          },
+          "block_number": {
+            "type": "number",
+            "example": 1,
+            "description": "blockNumber"
+          },
+          "receipt_root": { "type": "string", "description": "receiptRoot" },
+          "status": {
+            "type": "boolean",
+            "example": true,
+            "description": "status"
+          },
+          "effective_gas_price": {
+            "type": "string",
+            "example": 0,
+            "description": "effectiveGasPrice"
+          },
+          "logs_bloom": {
+            "type": "string",
+            "example": "0x08000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000",
+            "description": "logsBloom"
+          },
+          "logs": {
+            "description": "The logs of the transaction",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TxLogResponseDto" }
+          },
+          "internal_transactions": {
+            "description": "The internal transactions of the transaction",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InternalTransactionResponseDto"
+            }
+          }
+        },
+        "required": [
+          "hash",
+          "transaction_index",
+          "from",
+          "to",
+          "receipt_contract_address",
+          "receipt_cumulative_gas_used",
+          "receipt_gas_used",
+          "input",
+          "output",
+          "value",
+          "nonce",
+          "gas_price",
+          "gas",
+          "timestamp",
+          "block_time",
+          "block_hash",
+          "block_number",
+          "receipt_root",
+          "status",
+          "effective_gas_price",
+          "logs_bloom",
+          "logs",
+          "internal_transactions"
+        ]
+      },
+      "BaseBlockDto": {
+        "type": "object",
+        "properties": {
+          "transaction_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "transactionRoot"
+          },
+          "receipt_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "receiptRoot"
+          },
+          "size": {
+            "type": "number",
+            "example": 500,
+            "description": "The block size"
+          },
+          "difficulty": {
+            "type": "number",
+            "example": 17179869184,
+            "description": "The difficulty of the block"
+          },
+          "total_difficulty": {
+            "type": "number",
+            "example": 17179869184,
+            "description": "The total difficulty"
+          },
+          "uncles": {
+            "example": [],
+            "description": "uncles",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "block": {
+            "type": "number",
+            "example": 9193266,
+            "description": "The block number"
+          },
+          "hash": {
+            "type": "string",
+            "example": "0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3",
+            "description": "hash"
+          },
+          "parent_hash": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "description": "The block hash of the parent block"
+          },
+          "nonce": {
+            "type": "string",
+            "example": "0x0000000000000042",
+            "description": "The nonce"
+          },
+          "sha3Uncles": {
+            "type": "string",
+            "example": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+            "description": "sha3Uncles"
+          },
+          "logs_bloom": {
+            "type": "string",
+            "example": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "description": "logsBloom"
+          },
+          "transactions_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "transactionsRoot"
+          },
+          "state_root": {
+            "type": "string",
+            "example": "0xd7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544",
+            "description": "stateRoot"
+          },
+          "receipts_root": {
+            "type": "string",
+            "example": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "description": "receiptsRoot"
+          },
+          "miner": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000000000",
+            "description": "The address of the miner"
+          },
+          "extra_data": {
+            "type": "string",
+            "example": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
+            "description": "extraData"
+          },
+          "gas_limit": {
+            "type": "number",
+            "example": 5000,
+            "description": "The gas limit"
+          },
+          "gas_used": {
+            "type": "number",
+            "example": 0,
+            "description": "The gas used"
+          },
+          "block_time": {
+            "type": "string",
+            "example": "1970-01-19T12:04:31.492Z",
+            "description": "The block time of the block"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "1687064975",
+            "description": "The timestamp of the block"
+          },
+          "base_fee_per_gas": {
+            "type": "number",
+            "example": 100,
+            "description": "baseFeePerGas"
+          },
+          "transaction_count": {
+            "type": "number",
+            "example": 100,
+            "description": "The number of transactions in the block"
+          },
+          "transactions": {
+            "description": "The transactions in the block",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TransactionResponseDto" }
+          }
+        },
+        "required": [
+          "transaction_root",
+          "receipt_root",
+          "size",
+          "difficulty",
+          "total_difficulty",
+          "uncles",
+          "block",
+          "hash",
+          "parent_hash",
+          "nonce",
+          "sha3Uncles",
+          "logs_bloom",
+          "transactions_root",
+          "state_root",
+          "receipts_root",
+          "miner",
+          "extra_data",
+          "gas_limit",
+          "gas_used",
+          "block_time",
+          "timestamp",
+          "transaction_count",
+          "transactions"
+        ]
+      },
+      "ListInternalTxResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InternalTransactionResponseDto"
+            }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "ListTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TransactionResponseDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "DecodedTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "The hash of the transaction"
+          },
+          "from": {
+            "type": "string",
+            "example": "0x35552c16704d214347f29fa77f77da6d75d7c752",
+            "description": "The sender"
+          },
+          "to": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000001003",
+            "description": "The recipient"
+          },
+          "input": { "type": "string", "description": "The input" },
+          "output": {
+            "type": "string",
+            "example": "",
+            "description": "The output"
+          },
+          "value": {
+            "type": "string",
+            "example": "0",
+            "description": "The value that was transferred (in wei)"
+          },
+          "nonce": {
+            "type": "number",
+            "example": 1,
+            "description": "The nonce"
+          },
+          "gas_price": { "type": "string", "description": "The gas price" },
+          "gas": {
+            "type": "string",
+            "example": "209665",
+            "description": "he gas of the transaction"
+          },
+          "block_hash": {
+            "type": "string",
+            "example": "0xd0bc67b50915467ada963c35ee00950f664788e47da8139d8c178653171034f1",
+            "description": "blockHash"
+          },
+          "block_number": {
+            "type": "number",
+            "example": 1,
+            "description": "blockNumber"
+          },
+          "transaction_index": {
+            "type": "number",
+            "example": 1,
+            "description": "The transaction index"
+          },
+          "contract_address": {
+            "type": "string",
+            "example": null,
+            "description": "contractAddress"
+          },
+          "cumulative_gas_used": {
+            "type": "number",
+            "example": 901693,
+            "description": "cumulativeGasUsed"
+          },
+          "effective_gas_price": {
+            "type": "number",
+            "example": 901693,
+            "description": "effectiveGasPrice"
+          },
+          "logs_bloom": {
+            "type": "string",
+            "example": "0x08000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000",
+            "description": "logsBloom"
+          },
+          "tx_input_decoded": {
+            "type": "string",
+            "example": "{\"args\":[\"0xF24aEbeF1D44e2706a5CfF85B839088F2a95ddb4\",\"500000000000000000000\"],\"functionFragment\":{\"type\":\"function\",\"name\":\"transfer\",\"constant\":false,\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":null,\"components\":null,\"arrayLength\":null,\"arrayChildren\":null,\"baseType\":\"address\",\"_isParamType\":true},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":null,\"components\":null,\"arrayLength\":null,\"arrayChildren\":null,\"baseType\":\"uint256\",\"_isParamType\":true}],\"outputs\":[{\"name\":null,\"type\":\"bool\",\"indexed\":null,\"components\":null,\"arrayLength\":null,\"arrayChildren\":null,\"baseType\":\"bool\",\"_isParamType\":true}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"gas\":null,\"_isFragment\":true},\"name\":\"transfer\",\"signature\":\"transfer(address,uint256)\",\"sighash\":\"0xa9059cbb\",\"value\":\"0\"}",
+            "description": "txInputDecoded"
+          },
+          "timestamp": {
+            "type": "number",
+            "description": "The block timestamp"
+          },
+          "block_time": { "type": "number", "description": "Block time" },
+          "type": {
+            "type": "string",
+            "example": "STATICCALL",
+            "description": "Call type"
+          },
+          "parent_tx_hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "The hash of the parent transaction"
+          },
+          "gas_used": {
+            "type": "number",
+            "example": 901693,
+            "description": "receiptGasUsed"
+          },
+          "status": {
+            "type": "boolean",
+            "example": true,
+            "description": "status"
+          },
+          "trace_id": {
+            "type": "string",
+            "example": "0_1_1",
+            "description": "traceId"
+          }
+        },
+        "required": [
+          "hash",
+          "from",
+          "to",
+          "input",
+          "output",
+          "value",
+          "nonce",
+          "gas_price",
+          "gas",
+          "block_hash",
+          "block_number",
+          "transaction_index",
+          "contract_address",
+          "cumulative_gas_used",
+          "effective_gas_price",
+          "logs_bloom",
+          "tx_input_decoded",
+          "timestamp",
+          "block_time",
+          "type",
+          "parent_tx_hash",
+          "gas_used",
+          "status",
+          "trace_id"
+        ]
+      },
+      "ListDecodedTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DecodedTransactionResponseDto"
+            }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "DecodeTransactionDto": {
+        "type": "object",
+        "properties": {
+          "abi": {
+            "type": "string",
+            "example": "",
+            "description": "The ABI to decode transaction"
+          }
+        },
+        "required": ["abi"]
+      },
+      "LogResponseDto": {
+        "type": "object",
+        "properties": {
+          "tx_hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "transactionHash"
+          },
+          "tx_index": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "txIndex"
+          },
+          "contract_address": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000001003",
+            "description": "contractAddress"
+          },
+          "block_hash": {
+            "type": "string",
+            "example": 1,
+            "description": "blockHash"
+          },
+          "block_number": {
+            "type": "number",
+            "example": 1,
+            "description": "blockNumber"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1661314004,
+            "description": "Block timestamp"
+          },
+          "block_time": {
+            "type": "string",
+            "example": "1970-01-19T12:04:31.492Z",
+            "description": "The block time of the block"
+          },
+          "log_index": {
+            "type": "number",
+            "example": "0",
+            "description": "logIndex"
+          },
+          "data": { "type": "string", "example": "0", "description": "data" },
+          "topic0": { "type": "string", "description": "topic 0" },
+          "topic1": { "type": "string", "description": "topic 1" },
+          "topic2": { "type": "string", "description": "topic 2" },
+          "topic3": { "type": "string", "description": "topic 3" },
+          "removed": {
+            "type": "boolean",
+            "example": "0",
+            "description": "removed"
+          }
+        },
+        "required": [
+          "tx_hash",
+          "tx_index",
+          "contract_address",
+          "block_hash",
+          "block_number",
+          "timestamp",
+          "block_time",
+          "log_index",
+          "data",
+          "topic0",
+          "topic1",
+          "topic2",
+          "topic3",
+          "removed"
+        ]
+      },
+      "ListLogResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogResponseDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "DecodedLogResponseDto": {
+        "type": "object",
+        "properties": {
+          "tx_hash": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "transactionHash"
+          },
+          "contract_address": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000001003",
+            "description": "contractAddress"
+          },
+          "block_number": {
+            "type": "number",
+            "example": 1,
+            "description": "blockNumber"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1661314004,
+            "description": "Block timestamp"
+          },
+          "block_time": {
+            "type": "string",
+            "example": "1970-01-19T12:04:31.492Z",
+            "description": "The block time of the block"
+          },
+          "signature": {
+            "type": "string",
+            "example": "0x8c7a005d0c03b6c696d46ebc8a6ea1a4ebf7593154ccc30e98b7388eb7a443a8",
+            "description": "signature"
+          },
+          "index": {
+            "type": "number",
+            "example": "0",
+            "description": "logIndex"
+          },
+          "data_decoded": {
+            "type": "string",
+            "example": "0",
+            "description": "data"
+          },
+          "event_name": {
+            "type": "string",
+            "example": "0",
+            "description": "eventName"
+          }
+        },
+        "required": [
+          "tx_hash",
+          "contract_address",
+          "block_number",
+          "timestamp",
+          "block_time",
+          "signature",
+          "index",
+          "data_decoded",
+          "event_name"
+        ]
+      },
+      "ListDecodedLogResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/DecodedLogResponseDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "DecodeLogDto": {
+        "type": "object",
+        "properties": {
+          "abi": {
+            "type": "string",
+            "example": "",
+            "description": "The ABI to decode log"
+          }
+        },
+        "required": ["abi"]
+      },
+      "SyncCollectionMetadataDto": {
+        "type": "object",
+        "properties": {
+          "collection_address": {
+            "type": "string",
+            "description": "Collection address"
+          }
+        },
+        "required": ["collection_address"]
+      },
+      "NftCollection": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "The address of the NFT contract"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of NFT contract standard"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the NFT contract"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the NFT contract"
+          },
+          "owner": {
+            "type": "string",
+            "description": "The owner of the NFT contract"
+          },
+          "base_uri": {
+            "type": "string",
+            "description": "The base uri of the NFT contract"
+          },
+          "total_supply": {
+            "type": "string",
+            "description": "The total supply of the NFT contract"
+          }
+        },
+        "required": ["address", "type", "name", "symbol"]
+      },
+      "ListNftCollectionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NftCollection" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "MetadataAttribute": {
+        "type": "object",
+        "properties": {
+          "trait_type": {
+            "type": "string",
+            "description": "The trait title or descriptor"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the attribute"
+          },
+          "max_value": {
+            "type": "number",
+            "description": "For numeric values, the upper range"
+          },
+          "trait_count": {
+            "type": "number",
+            "description": "The number of possible values for this trait"
+          },
+          "order": {
+            "type": "number",
+            "description": "Order the trait should appear in the attribute list."
+          }
+        },
+        "required": ["trait_type", "value", "max_value", "trait_count", "order"]
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name or title of the NFT"
+          },
+          "description": {
+            "type": "string",
+            "description": "A detailed description of the NFT"
+          },
+          "image": {
+            "type": "string",
+            "description": "The URL of the NFT's image"
+          },
+          "external_link": {
+            "type": "string",
+            "description": "A link to additional information"
+          },
+          "animation_url": {
+            "type": "string",
+            "description": "An animated version of the NFT's image"
+          },
+          "attributes": {
+            "description": "An animated version of the NFT's image",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/MetadataAttribute" }
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "image",
+          "external_link",
+          "animation_url",
+          "attributes"
+        ]
+      },
+      "NFTResponseDto": {
+        "type": "object",
+        "properties": {
+          "token_address": {
+            "type": "string",
+            "description": "The address of the NFT contract"
+          },
+          "contract_type": {
+            "type": "string",
+            "description": "The type of NFT contract standard"
+          },
+          "token_id": {
+            "type": "string",
+            "description": "The token ID of the NFT"
+          },
+          "owner_of": {
+            "type": "string",
+            "description": "The wallet address of the owner of the NFT"
+          },
+          "minter_address": {
+            "type": "number",
+            "description": "The wallet address of the minter"
+          },
+          "block_number_minted": {
+            "type": "number",
+            "description": "The block number when the NFT was minted"
+          },
+          "metadata": {
+            "description": "The metadata of the token",
+            "allOf": [{ "$ref": "#/components/schemas/Metadata" }]
+          },
+          "amount": {
+            "type": "string",
+            "description": "The number of this item the user owns (used by ERC1155)"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the NFT contract"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the NFT contract"
+          },
+          "token_hash": { "type": "string", "description": "The token hash" },
+          "last_token_uri_sync": {
+            "type": "number",
+            "description": "When the token_uri was last updated"
+          },
+          "last_metadata_sync": {
+            "type": "number",
+            "description": "When the metadata was last updated"
+          },
+          "token_uri": {
+            "type": "string",
+            "description": "The URI to the metadata of the token"
+          }
+        },
+        "required": [
+          "token_address",
+          "contract_type",
+          "token_id",
+          "owner_of",
+          "minter_address",
+          "block_number_minted",
+          "metadata",
+          "amount",
+          "name",
+          "symbol",
+          "token_hash",
+          "last_token_uri_sync",
+          "last_metadata_sync",
+          "token_uri"
+        ]
+      },
+      "ListNFTResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NFTResponseDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "NftTransferDto": {
+        "type": "object",
+        "properties": {
+          "token_address": {
+            "type": "string",
+            "description": "The address of the NFT contract"
+          },
+          "transaction_hash": {
+            "type": "string",
+            "description": "The transaction hash"
+          },
+          "transaction_type": {
+            "type": "string",
+            "description": "The type of NFT contract standard"
+          },
+          "transaction_index": {
+            "type": "number",
+            "description": "The transaction index"
+          },
+          "contract_type": {
+            "type": "string",
+            "description": "The type of NFT contract standard"
+          },
+          "token_id": {
+            "type": "string",
+            "description": "The token ID of the NFT"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value that was sent in the transaction (ETH/BNB/etc..)"
+          },
+          "block_hash": {
+            "type": "string",
+            "description": "The block hash of the transaction"
+          },
+          "block_number": {
+            "type": "number",
+            "description": "The block number when the amount or owner changed"
+          },
+          "log_index": { "type": "number", "description": "The log index" },
+          "block_timestamp": {
+            "type": "number",
+            "description": "The block timestamp"
+          },
+          "amount": {
+            "type": "string",
+            "description": "The number of tokens transferred"
+          },
+          "from_address": {
+            "type": "string",
+            "description": "The address that sent the NFT"
+          },
+          "to_address": {
+            "type": "string",
+            "description": "The address that received the NFT"
+          },
+          "operator": {
+            "type": "string",
+            "description": "The operator present only for ERC1155 transfers"
+          }
+        },
+        "required": [
+          "token_address",
+          "transaction_hash",
+          "transaction_type",
+          "transaction_index",
+          "contract_type",
+          "token_id",
+          "value",
+          "block_hash",
+          "block_number",
+          "log_index",
+          "block_timestamp",
+          "amount",
+          "from_address",
+          "to_address",
+          "operator"
+        ]
+      },
+      "ListNftTransfersResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NftTransferDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "SyncNFTMetadataDto": {
+        "type": "object",
+        "properties": {
+          "token_id": { "type": "string", "description": "token id" },
+          "tokenAddress": {
+            "type": "string",
+            "description": "Collection address"
+          }
+        },
+        "required": ["token_id", "tokenAddress"]
+      },
+      "NftOwnerResponseDto": {
+        "type": "object",
+        "properties": {
+          "token_address": {
+            "type": "string",
+            "description": "The address of the NFT contract"
+          },
+          "contract_type": {
+            "type": "string",
+            "description": "The type of NFT contract standard"
+          },
+          "token_id": {
+            "type": "string",
+            "description": "The token ID of the NFT"
+          },
+          "owner_of": {
+            "type": "string",
+            "description": "The wallet address of the owner of the NFT"
+          },
+          "minter_address": {
+            "type": "number",
+            "description": "The wallet address of the minter"
+          },
+          "block_number": {
+            "type": "number",
+            "description": "The block number when the amount or owner changed"
+          },
+          "block_number_minted": {
+            "type": "number",
+            "description": "The block number when the NFT was minted"
+          },
+          "metadata": {
+            "description": "The metadata of the token",
+            "allOf": [{ "$ref": "#/components/schemas/Metadata" }]
+          },
+          "amount": {
+            "type": "string",
+            "description": "The number of this item the user owns (used by ERC1155)"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the NFT contract"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the NFT contract"
+          },
+          "token_hash": { "type": "string", "description": "The token hash" },
+          "last_token_uri_sync": {
+            "type": "number",
+            "description": "When the token_uri was last updated"
+          },
+          "last_metadata_sync": {
+            "type": "number",
+            "description": "When the metadata was last updated"
+          },
+          "token_uri": {
+            "type": "string",
+            "description": "The URI to the metadata of the token"
+          }
+        },
+        "required": [
+          "token_address",
+          "contract_type",
+          "token_id",
+          "owner_of",
+          "minter_address",
+          "block_number",
+          "block_number_minted",
+          "metadata",
+          "amount",
+          "name",
+          "symbol",
+          "token_hash",
+          "last_token_uri_sync",
+          "last_metadata_sync",
+          "token_uri"
+        ]
+      },
+      "ListNftOwnerResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "description": "Array of documents",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NftOwnerResponseDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "ERC20TokenBurnDto": {
+        "type": "object",
+        "properties": {
+          "token_name": {
+            "type": "string",
+            "description": "The name or title of the token"
+          },
+          "token_symbol": {
+            "type": "string",
+            "description": "The symbol of the token"
+          },
+          "token_decimals": {
+            "type": "number",
+            "description": "The decimals of the token"
+          },
+          "contract_address": {
+            "type": "string",
+            "description": "The address of the token"
+          },
+          "transaction_hash": {
+            "type": "string",
+            "description": "The transaction hash of the token"
+          },
+          "transaction_index": {
+            "type": "number",
+            "description": "The transaction index of the token"
+          },
+          "log_index": {
+            "type": "number",
+            "description": "The log index of the token"
+          },
+          "block_hash": {
+            "type": "number",
+            "description": "The block hash of the token"
+          },
+          "block_number": {
+            "type": "number",
+            "description": "The block number of the token"
+          },
+          "block_timestamp": {
+            "type": "number",
+            "description": "The block timestamp of the token"
+          },
+          "from_wallet": {
+            "type": "string",
+            "description": "The from wallet of the token"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the token"
+          },
+          "value_in_decimal": {
+            "type": "string",
+            "description": "The value in decimal of the token"
+          }
+        },
+        "required": [
+          "token_name",
+          "token_symbol",
+          "token_decimals",
+          "contract_address",
+          "transaction_hash",
+          "transaction_index",
+          "log_index",
+          "block_hash",
+          "block_number",
+          "from_wallet",
+          "value",
+          "value_in_decimal"
+        ]
+      },
+      "ERC20TokenBurnResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ERC20TokenBurnDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "ERC20TokenMetadata": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name or title of the token"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the token"
+          },
+          "decimals": {
+            "type": "string",
+            "description": "The decimals of the token"
+          },
+          "contract_address": {
+            "type": "string",
+            "description": "The address of the token"
+          },
+          "total_supply": {
+            "type": "string",
+            "description": "The total supply the token"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description the token"
+          },
+          "icon_url": {
+            "type": "string",
+            "description": "The icon url the token"
+          },
+          "last_synced_at": {
+            "type": "number",
+            "description": "The time last sync of the token"
+          }
+        },
+        "required": [
+          "name",
+          "symbol",
+          "decimals",
+          "contract_address",
+          "total_supply",
+          "description",
+          "icon_url",
+          "last_synced_at"
+        ]
+      },
+      "ERC20TokenMetadataResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ERC20TokenMetadata" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "ERC20TokenMintDto": {
+        "type": "object",
+        "properties": {
+          "token_name": {
+            "type": "string",
+            "description": "The name or title of the token"
+          },
+          "token_symbol": {
+            "type": "string",
+            "description": "The symbol of the token"
+          },
+          "token_decimals": {
+            "type": "number",
+            "description": "The decimals of the token"
+          },
+          "contract_address": {
+            "type": "string",
+            "description": "The address of the token"
+          },
+          "transaction_hash": {
+            "type": "string",
+            "description": "The transaction hash of the token"
+          },
+          "transaction_index": {
+            "type": "number",
+            "description": "The transaction index of the token"
+          },
+          "log_index": {
+            "type": "number",
+            "description": "The log index of the token"
+          },
+          "block_hash": {
+            "type": "number",
+            "description": "The block hash of the token"
+          },
+          "block_number": {
+            "type": "number",
+            "description": "The block number of the token"
+          },
+          "block_timestamp": {
+            "type": "number",
+            "description": "The block timestamp of the token"
+          },
+          "to_wallet": {
+            "type": "string",
+            "description": "The to wallet of the token"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the token"
+          },
+          "value_in_decimal": {
+            "type": "string",
+            "description": "The value in decimal of the token"
+          }
+        },
+        "required": [
+          "token_name",
+          "token_symbol",
+          "token_decimals",
+          "contract_address",
+          "transaction_hash",
+          "transaction_index",
+          "log_index",
+          "block_hash",
+          "block_number",
+          "to_wallet",
+          "value",
+          "value_in_decimal"
+        ]
+      },
+      "ERC20TokenMintResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ERC20TokenMintDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "BaseToken": {
+        "type": "object",
+        "properties": {
+          "token_name": {
+            "type": "string",
+            "description": "The name or title of the token"
+          },
+          "token_symbol": {
+            "type": "string",
+            "description": "The symbol of the token"
+          },
+          "token_decimals": {
+            "type": "number",
+            "description": "The decimals of the token"
+          },
+          "contract_address": {
+            "type": "string",
+            "description": "The address of the token"
+          },
+          "transaction_hash": {
+            "type": "string",
+            "description": "The transaction hash of the token"
+          },
+          "transaction_index": {
+            "type": "number",
+            "description": "The transaction index of the token"
+          },
+          "log_index": {
+            "type": "number",
+            "description": "The log index of the token"
+          },
+          "block_hash": {
+            "type": "number",
+            "description": "The block hash of the token"
+          },
+          "block_number": {
+            "type": "number",
+            "description": "The block number of the token"
+          },
+          "block_timestamp": {
+            "type": "number",
+            "description": "The block timestamp of the token"
+          },
+          "from_wallet": {
+            "type": "string",
+            "description": "The from wallet of the token"
+          },
+          "to_wallet": {
+            "type": "string",
+            "description": "The to wallet of the token"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the token"
+          },
+          "value_in_decimal": {
+            "type": "string",
+            "description": "The value in decimal of the token"
+          }
+        },
+        "required": [
+          "token_name",
+          "token_symbol",
+          "token_decimals",
+          "contract_address",
+          "transaction_hash",
+          "transaction_index",
+          "log_index",
+          "block_hash",
+          "block_number",
+          "from_wallet",
+          "to_wallet",
+          "value",
+          "value_in_decimal"
+        ]
+      },
+      "ERC20TokenTransferResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BaseToken" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "ERC20TokenApprovalResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BaseToken" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "ERC20TokenBalanceDto": {
+        "type": "object",
+        "properties": {
+          "token_name": {
+            "type": "string",
+            "description": "The name or title of the token"
+          },
+          "token_symbol": {
+            "type": "string",
+            "description": "The symbol of the token"
+          },
+          "token_decimals": {
+            "type": "number",
+            "description": "The decimals of the token"
+          },
+          "contract_address": {
+            "type": "string",
+            "description": "The address of the token"
+          },
+          "wallet_address": {
+            "type": "string",
+            "description": "The wallet address of the token"
+          },
+          "balance": {
+            "type": "string",
+            "description": "The balance of the token"
+          },
+          "balance_in_decimal": {
+            "type": "string",
+            "description": "The balance in decimal of the token"
+          },
+          "last_synced_at": {
+            "type": "number",
+            "description": "The time last sync of the token"
+          }
+        },
+        "required": [
+          "token_name",
+          "token_symbol",
+          "token_decimals",
+          "contract_address",
+          "wallet_address",
+          "balance",
+          "balance_in_decimal",
+          "last_synced_at"
+        ]
+      },
+      "ERC20TokenBalancesResponseDto": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "number", "description": "Offset" },
+          "limit": { "type": "number", "description": "Limit of results" },
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ERC20TokenBalanceDto" }
+          }
+        },
+        "required": ["offset", "limit", "total_items", "data"]
+      },
+      "BalanceResponseDto": { "type": "object", "properties": {} },
+      "PortfolioResponseDto": { "type": "object", "properties": {} }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+  }
+}

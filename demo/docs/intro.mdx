@@ -1,0 +1,59 @@
+---
+sidebar_position: 1
+hide_title: true
+sidebar_label: Overview
+title: Overview
+slug: /
+image: https://docusaurus-openapi.tryingpan.dev/img/docusaurus-openapi-docs-logo.svg
+tags:
+  - documentation
+  - openapi
+  - getting started
+  - quickstart
+---
+
+# What are blockchain events ?
+
+On-chain events are a permanent and irreversible record of what occurred on the blockchain. This provides the trust and transparency required for many use cases, such as financial transactions and voting systems. It is possible to verify the authenticity and integrity of data as well as ensure that it cannot be tampered with or altered by recording events on the blockchain. As a result, on-chain events are a valuable tool for developing secure and reliable blockchain applications.  
+On-chain events include function events (a write smart contract function is executed), log events (the events are emitted when a write smart contract function is executed), and internal transactions.
+
+# What is the Blocklens Trigger?
+
+You can use Blocklens Trigger to listen for real-time events on-chain, such as when a new event is issued in your contract or when a wallet address executes a transaction or burns/mints an NFT. Notifications for every transaction are also available. If you subscribe to our plan, you will receive webhook responses for events that are unique to your trigger configuration.
+
+# Working With Webhooks
+
+Webhooks allow an app to provide real-time information to other apps. A webhook delivers data to other applications as it happens, which means you get data immediately, as opposed to traditional APIs, which require you to poll for data very frequently to get it in real time.  
+For example, when an event occurs, a real-time notification is sent via HTTP POST to a custom URL you specify, including a data payload (data is decoded based on the ABI provided).
+
+# Blocklens Trigger features
+
+- Receive and listen to blockchain events directly to your backend in real-time.
+- You can track millions of addresses with only a single trigger.
+- Selecting which blockchain events you want to listen to and adding custom ABI.
+- The data in blockchain events are decoded based on the custom ABI you've specified or on whitelisting ABI pools.
+- More features are coming
+
+# Popular use cases
+
+Wallet notifications in real time (monitor when any address sends, receives, stakes, swaps, or burns assets)
+
+Assets notifications in real time (monitor when any asset is being sent, received, staked, swapped, or burned)
+
+NFT notifications in real time:
+
+- In marketplace, for example when an NFT listing or purchased
+- In gamefi, for example when an NFT deposited to a smart contract to be locked and used in traditional games.
+
+Token sales notifications in real time (monitor when someone participates in your token sale)
+
+Any other smart contract event fires on-chain based on your filters
+
+# Supported chains
+
+| Chain               | Mainnet            | Testnet            |
+| ------------------- | ------------------ | :----------------- |
+| Bitcoin             | :white-check-mark: | :white-check-mark: |
+| Ethereum            | :white-check-mark: | :white-check-mark: |
+| Binance Smart Chain | :white-check-mark: | :white-check-mark: |
+| Polygon             | :white-check-mark: | :white-check-mark: |
