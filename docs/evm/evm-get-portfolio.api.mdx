@@ -1,0 +1,34 @@
+---
+id: evm-get-portfolio
+title: "Gets portfolio by wallet"
+description: "Gets the portfolio for a given network and address."
+sidebar_label: "Gets portfolio by wallet"
+hide_title: true
+hide_table_of_contents: true
+api: {"operationId":"evm_getPortfolio","description":"Gets the portfolio for a given network and address.","parameters":[{"name":"address","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Successful","content":{"application/json":{"schema":{"type":"object","properties":{},"title":"PortfolioResponseDto"}}}}},"tags":["Get balances"],"security":[{"apiKey":[]}],"method":"get","path":"/v1/balance/{address}/portfolio","servers":[{"url":"https://eth-mainnet-api.blocklens.io","description":"Ethereum Mainnet server"}],"securitySchemes":{"bearer":{"scheme":"bearer","bearerFormat":"JWT","type":"http"},"basic":{"type":"http","scheme":"basic"},"apiKey":{"type":"apiKey","name":"x-api-key","in":"header"}},"info":{"title":"EVM APIs","description":"Swagger documentation","version":"1.0.0","contact":{}},"postman":{"name":"Gets portfolio by wallet","description":{"content":"Gets the portfolio for a given network and address.","type":"text/plain"},"url":{"path":["v1","balance",":address","portfolio"],"host":["{{baseUrl}}"],"query":[],"variable":[{"disabled":false,"description":{"content":"(Required) ","type":"text/plain"},"type":"any","value":"","key":"address"}]},"header":[{"key":"Accept","value":"application/json"}],"method":"GET","auth":{"type":"apikey","apikey":[{"type":"any","value":"x-api-key","key":"key"},{"type":"any","value":"<API Key>","key":"value"},{"type":"any","value":"header","key":"in"}]}}}
+sidebar_class_name: "get api-method"
+info_path: evm/evm-apis
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Gets portfolio by wallet
+
+
+
+Gets the portfolio for a given network and address.
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"address","required":true,"in":"path","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+Successful
+
+</div><div><MimeTabs schemaType={"response"}></MimeTabs></div></TabItem></ApiTabs></div>
+      
