@@ -9,10 +9,6 @@
  Create as many sidebars as you want.
  */
 const chainNames = require("./src/sidebars/chains.json");
-const {
-  versionSelector,
-  versionCrumb,
-} = require("docusaurus-plugin-openapi-docs/lib/sidebars/utils");
 const { chainSelector } = require("./src/sidebars/utils");
 
 const sidebars = {

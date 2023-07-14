@@ -12,8 +12,8 @@ const config = {
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
-  organizationName: "PaloAltoNetworks",
-  projectName: "docusaurus-openapi-docs",
+  organizationName: "Blocklens",
+  projectName: "blocklens-docs-api",
 
   presets: [
     [
@@ -24,7 +24,7 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl:
-            "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/tree/main/demo",
+            "https://github.com/sotatek-dev/blocklens-docs-api/tree/master",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
@@ -62,7 +62,7 @@ const config = {
             label: "Web3 Data API",
           },
           {
-            href: "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs",
+            href: "https://github.com/sotatek-dev/blocklens-docs-api",
             position: "right",
             className: "header-github-link",
             "aria-label": "GitHub repository",
@@ -102,12 +102,8 @@ const config = {
             title: "More",
             items: [
               {
-                label: "Blog",
-                href: "https://medium.com/palo-alto-networks-developer-blog",
-              },
-              {
                 label: "GitHub",
-                href: "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs",
+                href: "https://github.com/sotatek-dev/blocklens-docs-api",
               },
             ],
           },
