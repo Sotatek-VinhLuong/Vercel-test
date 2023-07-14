@@ -49,10 +49,9 @@ const config = {
         },
       },
       navbar: {
-        title: "Blocklens API Docs",
         logo: {
           alt: "Keytar",
-          src: "img/docusaurus-openapi-docs-logo.svg",
+          src: "img/blocklens-logo.svg",
         },
         items: [
           {
@@ -168,11 +167,6 @@ const config = {
         apiKey: "441074cace987cbf4640c039ebed303c",
         appId: "J0EABTYI1A",
         indexName: "docusaurus-openapi",
-      },
-      announcementBar: {
-        id: "announcementBar_1",
-        content:
-          "🥳 Support for Docusaurus v2.3.0 is now available in v2.0.0-beta. See badges/releases for latest beta release.",
       },
     }),
 
