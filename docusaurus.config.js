@@ -190,6 +190,7 @@ const config = {
             outputDir: "docs/evm",
             sidebarOptions: {
               groupPathsBy: "tag",
+              categoryLinkSource: "tag",
             },
           },
           sui: {
@@ -197,6 +198,7 @@ const config = {
             outputDir: "docs/sui",
             sidebarOptions: {
               groupPathsBy: "tag",
+              categoryLinkSource: "tag",
             },
           },
         },

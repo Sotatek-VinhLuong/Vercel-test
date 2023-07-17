@@ -5245,8 +5245,24 @@
         },
         "required": ["offset", "limit", "total_items", "data"]
       },
-      "BalanceResponseDto": { "type": "object", "properties": {} },
-      "PortfolioResponseDto": { "type": "object", "properties": {} }
+      "BalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          }
+        }
+      },
+      "PortfolioResponseDto": {
+        "type": "object",
+        "properties": {
+          "total_items": {
+            "type": "number",
+            "description": "Total returned result items"
+          }
+        }
+      }
     }
   },
   "x-readme": {
