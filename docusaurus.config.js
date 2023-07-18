@@ -164,9 +164,9 @@ const config = {
         },
       ],
       algolia: {
-        apiKey: "441074cace987cbf4640c039ebed303c",
-        appId: "J0EABTYI1A",
-        indexName: "docusaurus-openapi",
+        apiKey: "6077793ddd898639f4f95b453fd29c7e",
+        appId: "HMQ0ANGGV5",
+        indexName: "blocklens-vercel",
       },
     }),
 
