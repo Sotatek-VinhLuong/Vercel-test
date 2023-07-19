@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "lagom-docs-api",
   "version": "1.7.3",
   "private": true,
   "scripts": {

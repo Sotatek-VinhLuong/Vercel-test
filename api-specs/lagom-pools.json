@@ -1,0 +1,892 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Lagom Pools",
+    "description": "Lagom Pools",
+    "version": "v1",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "https://api.blocksniper.io/api/v1/pools"
+    }
+  ],
+  "paths": {
+    "/crosschain-pools/{currencyId}": {
+      "post": {
+        "tags": ["cross-chain-pool-controller"],
+        "summary": "add liquidity",
+        "operationId": "addLiquidity",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLiquidityRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoCrossChainPoolActionEntity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["cross-chain-pool-controller"],
+        "summary": "remove liquidity",
+        "operationId": "removeLiquidity",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLiquidityRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoCrossChainPoolActionEntity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/crosschain-pools/{currencyId}/swaps": {
+      "post": {
+        "tags": ["cross-chain-pool-controller"],
+        "summary": "swap",
+        "operationId": "swap",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwapCurrencyRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoCrossChainPoolActionEntity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/public/crosschain-pools": {
+      "get": {
+        "tags": ["public-cross-chain-pool-controller"],
+        "operationId": "getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseDtoCrossChainPoolResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/crosschain-pools/{currencyId}": {
+      "get": {
+        "tags": ["public-cross-chain-pool-controller"],
+        "operationId": "getDetail",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoCrossChainPoolDetailResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/crosschain-pools/{currencyId}/swaps": {
+      "get": {
+        "tags": ["public-cross-chain-pool-controller"],
+        "operationId": "getSwapHistory",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseDtoSwapResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/crosschain-pools/{currencyId}/snapshots": {
+      "get": {
+        "tags": ["public-cross-chain-pool-controller"],
+        "operationId": "getSnapshots",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseDtoCrossChainPoolSnapshotEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/crosschain-pools/{currencyId}/holders": {
+      "get": {
+        "tags": ["public-cross-chain-pool-controller"],
+        "operationId": "getHolders",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseDtoLiquidityProviderEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/crosschain-pools/{currencyId}/balances": {
+      "get": {
+        "tags": ["public-cross-chain-pool-controller"],
+        "operationId": "getBalances",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseDtoPoolEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crosschain-pools/{currencyId}/my-liquidity": {
+      "get": {
+        "tags": ["cross-chain-pool-controller"],
+        "summary": "get my liquidity",
+        "operationId": "getMyLiquidity",
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoLiquidityProviderDetailResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UpdateLiquidityRequestBody": {
+        "required": ["amount", "networkId"],
+        "type": "object",
+        "properties": {
+          "networkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "string"
+          }
+        }
+      },
+      "CrossChainPoolActionEntity": {
+        "type": "object",
+        "properties": {
+          "txId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fromNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "toNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "action": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "amountTranfer": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ResponseDtoCrossChainPoolActionEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CrossChainPoolActionEntity"
+          }
+        }
+      },
+      "SwapCurrencyRequestBody": {
+        "required": ["amount", "fromNetworkId", "toNetworkId"],
+        "type": "object",
+        "properties": {
+          "fromNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "toNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "string"
+          }
+        }
+      },
+      "CrossChainPoolResponseDto": {
+        "type": "object",
+        "properties": {
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "swapFee": {
+            "type": "number"
+          },
+          "totalSupply": {
+            "type": "number"
+          },
+          "totalShares": {
+            "type": "number"
+          },
+          "coingeckoId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MetaDataResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hasNext": {
+            "type": "boolean"
+          },
+          "hasPrevious": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageResponseDtoCrossChainPoolResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrossChainPoolResponseDto"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetaDataResponseDto"
+          }
+        }
+      },
+      "CrossChainPoolDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "swapFee": {
+            "type": "number"
+          },
+          "totalShares": {
+            "type": "number"
+          },
+          "volume24h": {
+            "type": "number"
+          },
+          "coingeckoId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseDtoCrossChainPoolDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CrossChainPoolDetailResponseDto"
+          }
+        }
+      },
+      "PageResponseDtoSwapResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SwapResponseDto"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetaDataResponseDto"
+          }
+        }
+      },
+      "SwapResponseDto": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "networkTradeIn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amountTradeIn": {
+            "type": "number"
+          },
+          "networkTradeOut": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amountTradeOut": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          }
+        }
+      },
+      "CrossChainPoolSnapshotEntity": {
+        "type": "object",
+        "properties": {
+          "snapshotId": {
+            "type": "string"
+          },
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "resolutions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalShares": {
+            "type": "number"
+          },
+          "volume": {
+            "type": "number"
+          },
+          "feeReturn": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ListResponseDtoCrossChainPoolSnapshotEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrossChainPoolSnapshotEntity"
+            }
+          }
+        }
+      },
+      "LiquidityProviderEntity": {
+        "type": "object",
+        "properties": {
+          "lpId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalShares": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResponseDtoLiquidityProviderEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiquidityProviderEntity"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetaDataResponseDto"
+          }
+        }
+      },
+      "ListResponseDtoPoolEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PoolEntity"
+            }
+          }
+        }
+      },
+      "PoolEntity": {
+        "type": "object",
+        "properties": {
+          "poolId": {
+            "type": "string"
+          },
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "networkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalSupply": {
+            "type": "number"
+          },
+          "totalFeeRemaning": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "LiquidityProviderDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "lpId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalShares": {
+            "type": "number"
+          },
+          "userShares": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserSharesEntity"
+            }
+          }
+        }
+      },
+      "ResponseDtoLiquidityProviderDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LiquidityProviderDetailResponseDto"
+          }
+        }
+      },
+      "UserSharesEntity": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "currencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "networkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shares": {
+            "type": "number"
+          },
+          "dividend": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer Authentication": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

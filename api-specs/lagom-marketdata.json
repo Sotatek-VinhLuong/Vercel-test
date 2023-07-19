@@ -1,0 +1,493 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lagom market data",
+    "description": "Lagom market data",
+    "version": "api/v1/marketdata",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "PairDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id",
+            "example": 5000000
+          },
+          "symbol": {
+            "type": "string",
+            "description": "name of pair",
+            "example": "BNBUSDT"
+          },
+          "baseCurrencyId": {
+            "type": "number",
+            "description": "base currency id",
+            "example": 2001
+          },
+          "baseCurrencySymbol": {
+            "type": "string",
+            "description": "symbol of base currency",
+            "example": "BNB"
+          },
+          "quoteCurrencyId": {
+            "type": "number",
+            "description": "quote currency id",
+            "example": 2001
+          },
+          "quoteCurrencySymbol": {
+            "type": "string",
+            "description": "symbol of quote currency",
+            "example": "USDT"
+          },
+          "makerFee": {
+            "type": "string",
+            "description": "maket fee",
+            "example": "0.00070000"
+          },
+          "takerFee": {
+            "type": "string",
+            "description": "taker fee",
+            "example": "0.00090000"
+          },
+          "pricePrecision": {
+            "type": "number",
+            "description": "price precision",
+            "example": 3
+          },
+          "quantityPrecision": {
+            "type": "number",
+            "description": "quantity precision",
+            "example": 5
+          },
+          "minimumQty": {
+            "type": "string",
+            "description": "minimumQty",
+            "example": "0.00100000"
+          },
+          "maximumQty": {
+            "type": "string",
+            "description": "maximumQty",
+            "example": "1000000.00000000"
+          },
+          "createdAt": {
+            "type": "number",
+            "description": "createdAt",
+            "example": 1676271030323
+          },
+          "updatedAt": {
+            "type": "number",
+            "description": "updatedAt",
+            "example": 1676271030323
+          }
+        },
+        "required": [
+          "id",
+          "symbol",
+          "baseCurrencyId",
+          "baseCurrencySymbol",
+          "quoteCurrencyId",
+          "quoteCurrencySymbol",
+          "makerFee",
+          "takerFee",
+          "pricePrecision",
+          "quantityPrecision",
+          "minimumQty",
+          "maximumQty",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ListPairResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PairDto"
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "PairResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PairDto"
+          }
+        },
+        "required": ["data"]
+      },
+      "OrderBookRecord": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "description": "price",
+            "example": 15400
+          },
+          "volume": {
+            "type": "number",
+            "description": "volume",
+            "example": 10
+          }
+        },
+        "required": ["price", "volume"]
+      },
+      "OrderBookDto": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "symbol",
+            "example": "BNBUSDT"
+          },
+          "pairId": {
+            "type": "number",
+            "description": "pairId",
+            "example": 1
+          },
+          "asks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderBookRecord"
+            }
+          },
+          "bids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderBookRecord"
+            }
+          }
+        },
+        "required": ["symbol", "pairId", "asks", "bids"]
+      },
+      "ListOrderBookResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderBookDto"
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "OrderBookResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/OrderBookDto"
+          }
+        },
+        "required": ["data"]
+      },
+      "CurrencyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "networkId": {
+            "type": "number",
+            "example": 1
+          },
+          "address": {
+            "type": "string",
+            "example": "0x123..."
+          },
+          "symbol": {
+            "type": "string",
+            "example": "USDT"
+          },
+          "refSymbol": {
+            "type": "string",
+            "example": "USDT"
+          },
+          "decimals": {
+            "type": "number",
+            "example": 18
+          },
+          "confirmations": {
+            "type": "number",
+            "example": 5
+          },
+          "coingeckoId": {
+            "type": "string",
+            "example": "ethereum"
+          },
+          "icon": {
+            "type": "string",
+            "example": "icon-rounded-ethereum"
+          },
+          "enableDeposit": {
+            "type": "boolean",
+            "example": true
+          },
+          "enableWithdrawal": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "networkId",
+          "address",
+          "symbol",
+          "refSymbol",
+          "decimals",
+          "confirmations",
+          "coingeckoId",
+          "icon",
+          "enableDeposit",
+          "enableWithdrawal"
+        ]
+      },
+      "ListCurrencyResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CurrencyDto"
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "NetworkDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "chain": {
+            "type": "string",
+            "example": "bsc"
+          },
+          "chainName": {
+            "type": "string",
+            "example": "Binance Smart Chain"
+          },
+          "chainId": {
+            "type": "number",
+            "example": 97
+          },
+          "name": {
+            "type": "string",
+            "example": "bsc-testnet"
+          },
+          "iconUrl": {
+            "type": "string",
+            "example": ""
+          },
+          "fundContractAddr": {
+            "type": "string",
+            "example": "0x2B8fF854c5e16cF35B9A792390Cc3a2a60Ec9ba2"
+          },
+          "blockExplorerUrl": {
+            "type": "string",
+            "example": "https://testnet.bscscan.com/"
+          },
+          "blocklensApiUrl": {
+            "type": "string",
+            "example": "https://dev-bsc-testnet-api.sotatek.works/"
+          }
+        },
+        "required": [
+          "id",
+          "chain",
+          "chainName",
+          "chainId",
+          "name",
+          "iconUrl",
+          "fundContractAddr",
+          "blockExplorerUrl",
+          "blocklensApiUrl"
+        ]
+      },
+      "ListNetworkResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkDto"
+            }
+          }
+        },
+        "required": ["data"]
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/marketdata/pairs": {
+      "get": {
+        "operationId": "getAllPairs",
+        "summary": "get all pairs",
+        "description": "get all pairs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPairResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Pair"]
+      }
+    },
+    "/api/v1/marketdata/pairs/{pair}": {
+      "get": {
+        "operationId": "getPairByName",
+        "summary": "get pair by name",
+        "description": "get pair by name",
+        "parameters": [
+          {
+            "name": "pair",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PairResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Pair"]
+      }
+    },
+    "/api/v1/marketdata/orderbooks": {
+      "get": {
+        "operationId": "getOrderbook",
+        "summary": "get orderbook",
+        "description": "get orderbook",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrderBookResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Orderbook"]
+      }
+    },
+    "/api/v1/marketdata/orderbooks/{symbol}": {
+      "get": {
+        "operationId": "getOrderbookBySymbol",
+        "summary": "get orderbook by symbol",
+        "description": "get orderbook by symbol",
+        "parameters": [
+          {
+            "name": "symbol",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderBookResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Orderbook"]
+      }
+    },
+    "/api/v1/marketdata/currencies": {
+      "get": {
+        "operationId": "getAllCurrencies",
+        "summary": "get all currencies",
+        "description": "get all currencies",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCurrencyResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Setting"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/marketdata/networks": {
+      "get": {
+        "operationId": "getAllNetworks",
+        "summary": "get all networks",
+        "description": "get all networks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNetworkResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Setting"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  }
+}

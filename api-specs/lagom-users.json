@@ -1,0 +1,197 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/users": {
+      "get": {
+        "operationId": "AppController_health",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/users/time": {
+      "get": {
+        "operationId": "AppController_getTime",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/users/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestLoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/api/users/public/users/uids": {
+      "get": {
+        "operationId": "public.users.by-uids",
+        "summary": "Get user info by list uid",
+        "parameters": [
+          {
+            "name": "uids",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200-OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["public.users"]
+      }
+    },
+    "/api/users/public/users/address/{userAddress}": {
+      "get": {
+        "operationId": "public.users.by-address",
+        "summary": "Get user info by address",
+        "parameters": [
+          {
+            "name": "userAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200-OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["public.users"]
+      }
+    },
+    "/api/users/public/users/uid/{uid}": {
+      "get": {
+        "operationId": "public.users.by-uid",
+        "summary": "Get user info by uid",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200-OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["public.users"]
+      }
+    }
+  },
+  "info": {
+    "title": "Lagom Users Service",
+    "description": "Swagger documentation for Lagom Users Service APIs",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      },
+      "basic": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "RequestLoginDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "This is user address request to login",
+            "example": "0x0000000000000000000000000000000000000000"
+          },
+          "signature": {
+            "type": "string",
+            "description": "This is signature signed by user address",
+            "example": "0x5a4df514ff9dcf266e3a557b0885adf113305be0985145cd44380fed962c3aaf69a4a41e395ab27940cf767cd6075eda122519ce7e6eead5fd7680e284f682401c"
+          }
+        },
+        "required": ["address", "signature"]
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "number",
+            "description": "User id",
+            "example": 1
+          },
+          "address": {
+            "type": "string",
+            "description": "User address",
+            "example": "0x0"
+          }
+        },
+        "required": ["uid", "address"]
+      }
+    }
+  }
+}
