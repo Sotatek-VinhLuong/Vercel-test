@@ -1,8 +1,4 @@
-<h1 align="center">Lagom API Doc</h1>
-
----
-
-## Overview
+<h1 align="center">Lagom API Documentation</h1>
 
 ## Run in local
 
