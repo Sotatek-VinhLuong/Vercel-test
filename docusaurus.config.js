@@ -5,15 +5,14 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Blocklens API Docs",
-  tagline: "OpenAPI plugin for generating API reference docs in Docusaurus v2",
-  url: "https://docusaurus-openapi.tryingpan.dev",
+  title: "Lagom API Docs",
+  url: "https://api.blocksniper.io/",
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
-  organizationName: "Blocklens",
-  projectName: "blocklens-docs-api",
+  organizationName: "Lagom",
+  projectName: "lagom-docs-api",
 
   presets: [
     [
@@ -23,18 +22,13 @@ const config = {
         docs: {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl:
-            "https://github.com/sotatek-dev/blocklens-docs-api/tree/master",
+          editUrl: "https://github.com/sotatek-dev/lagom-docs-api/tree/master",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
-        },
-        gtag: {
-          trackingID: "GTM-THVM29S",
-          anonymizeIP: false,
         },
       }),
     ],
@@ -55,13 +49,7 @@ const config = {
         },
         items: [
           {
-            type: "doc",
-            docId: "intro",
-            position: "left",
-            label: "Web3 Data API",
-          },
-          {
-            href: "https://github.com/sotatek-dev/blocklens-docs-api",
+            href: "https://github.com/sotatek-dev/lagom-docs-api",
             position: "right",
             className: "header-github-link",
             "aria-label": "GitHub repository",
@@ -102,12 +90,12 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/sotatek-dev/blocklens-docs-api",
+                href: "https://github.com/sotatek-dev/lagom-docs-api",
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Blocklens. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Lagoms. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
       },
       prism: {
         additionalLanguages: ["ruby", "csharp", "php", "java", "powershell"],
@@ -177,25 +165,49 @@ const config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          aptos: {
-            specPath: "examples/aptos.json",
-            outputDir: "docs/aptos",
+          user: {
+            specPath: "api-specs/lagom-users.json",
+            outputDir: "docs/users",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
             },
           },
-          evm: {
-            specPath: "examples/evm.json",
-            outputDir: "docs/evm",
+          marketdata: {
+            specPath: "api-specs/lagom-marketdata.json",
+            outputDir: "docs/marketdata",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
             },
           },
-          sui: {
-            specPath: "examples/sui.json",
-            outputDir: "docs/sui",
+          account: {
+            specPath: "api-specs/lagom-accounts.json",
+            outputDir: "docs/accounts",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
+          order: {
+            specPath: "api-specs/lagom-orders.json",
+            outputDir: "docs/orders",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
+          pool: {
+            specPath: "api-specs/lagom-pools.json",
+            outputDir: "docs/pools",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
+          trade: {
+            specPath: "api-specs/lagom-trades.json",
+            outputDir: "docs/trades",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",

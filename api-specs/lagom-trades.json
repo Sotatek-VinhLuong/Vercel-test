@@ -1,0 +1,586 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Lagom Trades",
+    "description": "Lagom Trades",
+    "version": "v1",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "https://api.blocksniper.io/api/v1/trades"
+    }
+  ],
+  "paths": {
+    "/public/trades": {
+      "get": {
+        "tags": ["public-trade-controller"],
+        "summary": "get recent trades all pair",
+        "operationId": "getRecentTradesAllPais",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoListRecentTradesInPairResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/trades/{pairSymbol}": {
+      "get": {
+        "tags": ["public-trade-controller"],
+        "summary": "get recent trades by pair",
+        "operationId": "getRecentTradesByPair",
+        "parameters": [
+          {
+            "name": "pairSymbol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDtoListPublicTradeResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history/trade": {
+      "get": {
+        "tags": ["history-trade-controller"],
+        "summary": "get trading history",
+        "operationId": "getTradingHistory",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "side",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["ASK", "BID"]
+            }
+          },
+          {
+            "name": "pair",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "baseCurrency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "quoteCurrency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseDtoMyTradeResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/history/trade/{pairSymbol}": {
+      "get": {
+        "tags": ["history-trade-controller"],
+        "summary": "get trading history by symbol",
+        "operationId": "getTradingHistoryBySymbol",
+        "parameters": [
+          {
+            "name": "pairSymbol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseDtoTradeEntity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/history/trade/export-to-excel": {
+      "get": {
+        "tags": ["history-trade-controller"],
+        "summary": "Export trading history",
+        "operationId": "exportTradingHistory",
+        "parameters": [
+          {
+            "name": "side",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["ASK", "BID"]
+            }
+          },
+          {
+            "name": "pair",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PublicTradeResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "orderSide": {
+            "type": "string",
+            "enum": ["BUY", "SELL"]
+          },
+          "takerNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "makerNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "buyerIsTaker": {
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "RecentTradesInPairResponseDto": {
+        "type": "object",
+        "properties": {
+          "pairSymbol": {
+            "type": "string"
+          },
+          "docs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicTradeResponseDto"
+            }
+          }
+        }
+      },
+      "ResponseDtoListRecentTradesInPairResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecentTradesInPairResponseDto"
+            }
+          }
+        }
+      },
+      "ResponseDtoListPublicTradeResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicTradeResponseDto"
+            }
+          }
+        }
+      },
+      "MetaDataResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hasNext": {
+            "type": "boolean"
+          },
+          "hasPrevious": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MyTradeResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "buyOrderUid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "buyOrderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sellOrderUid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sellOrderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pair": {
+            "type": "string"
+          },
+          "pairId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "takerNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "makerNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "buyFee": {
+            "type": "number"
+          },
+          "sellFee": {
+            "type": "number"
+          },
+          "takerAction": {
+            "type": "string"
+          },
+          "buyerIsTaker": {
+            "type": "boolean"
+          },
+          "tradeSide": {
+            "type": "string"
+          },
+          "tradeFee": {
+            "type": "number"
+          },
+          "role": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResponseDtoMyTradeResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MyTradeResponseDto"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetaDataResponseDto"
+          }
+        }
+      },
+      "PageResponseDtoTradeEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TradeEntity"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetaDataResponseDto"
+          }
+        }
+      },
+      "TradeEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "buyOrderUid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "buyOrderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sellOrderUid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sellOrderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pair": {
+            "type": "string"
+          },
+          "pairId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "takerNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "makerNetworkId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "buyFee": {
+            "type": "number"
+          },
+          "sellFee": {
+            "type": "number"
+          },
+          "takerAction": {
+            "type": "string"
+          },
+          "buyerIsTaker": {
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "makerFee": {
+            "type": "number"
+          },
+          "takerFee": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer Authentication": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
