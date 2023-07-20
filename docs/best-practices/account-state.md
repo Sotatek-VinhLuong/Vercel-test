@@ -6,4 +6,4 @@ title: Retrieving and updating account state
 description: Retrieving and updating account state
 ---
 
-Comming soon
+Coming Soon

@@ -6,4 +6,4 @@ title: API Explorer
 description: API Explorer
 ---
 
-Comming soon
+Coming Soon

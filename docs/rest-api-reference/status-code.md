@@ -6,4 +6,4 @@ title: HTTP Status codes
 description: HTTP Status codes
 ---
 
-Comming soon
+Coming Soon

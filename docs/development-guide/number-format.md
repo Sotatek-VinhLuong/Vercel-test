@@ -6,4 +6,4 @@ title: Number Format
 description: Number Format
 ---
 
-Comming soon
+Coming Soon

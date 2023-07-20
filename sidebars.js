@@ -62,33 +62,43 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Users API",
+      label: "User",
       items: [require("./docs/users/sidebar.js")],
     },
     {
       type: "category",
-      label: "Marketdata API",
+      label: "Marketdata",
       items: [require("./docs/marketdata/sidebar.js")],
     },
     {
       type: "category",
-      label: "Account API",
+      label: "Account",
       items: [require("./docs/accounts/sidebar.js")],
     },
     {
       type: "category",
-      label: "Order API",
+      label: "Order",
       items: [require("./docs/orders/sidebar.js")],
     },
     {
       type: "category",
-      label: "Pool API",
+      label: "Pool",
       items: [require("./docs/pools/sidebar.js")],
     },
     {
       type: "category",
-      label: "Trade API",
+      label: "Trade",
       items: [require("./docs/trades/sidebar.js")],
+    },
+    {
+      type: "doc",
+      label: "Errors",
+      id: "errors",
+    },
+    {
+      type: "doc",
+      label: "Guide & Code Samples",
+      id: "code-sample",
     },
   ],
 };

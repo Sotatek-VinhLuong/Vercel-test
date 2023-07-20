@@ -6,4 +6,4 @@ title: Error response
 description: Error response
 ---
 
-Comming soon
+Coming Soon

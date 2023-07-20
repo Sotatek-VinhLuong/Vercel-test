@@ -58,44 +58,7 @@ const config = {
       },
       footer: {
         style: "dark",
-        links: [
-          {
-            title: "Docs",
-            items: [
-              {
-                label: "OpenAPI Docs",
-                to: "/",
-              },
-            ],
-          },
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
-              },
-              {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "GitHub",
-                href: "https://github.com/sotatek-dev/lagom-docs-api",
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} Lagoms. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Lagom. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
       },
       prism: {
         additionalLanguages: ["ruby", "csharp", "php", "java", "powershell"],
@@ -129,12 +92,6 @@ const config = {
           logoClass: "ruby",
         },
         {
-          highlight: "csharp",
-          language: "csharp",
-          logoClass: "csharp",
-          variant: "httpclient",
-        },
-        {
           highlight: "php",
           language: "php",
           logoClass: "php",
@@ -144,11 +101,6 @@ const config = {
           language: "java",
           logoClass: "java",
           variant: "unirest",
-        },
-        {
-          highlight: "powershell",
-          language: "powershell",
-          logoClass: "powershell",
         },
       ],
       algolia: {

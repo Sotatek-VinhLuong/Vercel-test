@@ -6,4 +6,4 @@ title: API URLs
 description: API URLs
 ---
 
-Comming soon
+Coming Soon

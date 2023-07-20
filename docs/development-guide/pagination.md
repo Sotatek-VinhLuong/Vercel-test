@@ -6,4 +6,4 @@ title: Pagination
 description: Pagination
 ---
 
-Comming soon
+Coming Soon
