@@ -1,31 +1,10 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/users": {
-      "get": {
-        "operationId": "AppController_health",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/users/time": {
-      "get": {
-        "operationId": "AppController_getTime",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/api/users/auth/login": {
       "post": {
         "operationId": "AuthController_login",
+        "summary": "Login",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -77,7 +56,7 @@
             }
           }
         },
-        "tags": ["public.users"]
+        "tags": ["Public Users"]
       }
     },
     "/api/users/public/users/address/{userAddress}": {
@@ -106,7 +85,7 @@
             }
           }
         },
-        "tags": ["public.users"]
+        "tags": ["Public Users"]
       }
     },
     "/api/users/public/users/uid/{uid}": {
@@ -135,7 +114,7 @@
             }
           }
         },
-        "tags": ["public.users"]
+        "tags": ["Public Users"]
       }
     }
   },
@@ -146,7 +125,11 @@
     "contact": {}
   },
   "tags": [],
-  "servers": [],
+  "servers": [
+    {
+      "url": "https://api.blocksniper.io"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "bearer": {
