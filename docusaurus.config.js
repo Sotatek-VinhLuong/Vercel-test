@@ -45,7 +45,7 @@ const config = {
       navbar: {
         logo: {
           alt: "Keytar",
-          src: "img/blocklens-logo.svg",
+          src: "img/logo.svg",
         },
         items: [
           {
