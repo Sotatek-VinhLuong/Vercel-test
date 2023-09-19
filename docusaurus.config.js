@@ -165,6 +165,22 @@ const config = {
               categoryLinkSource: "tag",
             },
           },
+          tickers: {
+            specPath: "api-specs/lagom-tickers.json",
+            outputDir: "docs/tickers",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
+          candles: {
+            specPath: "api-specs/lagom-candles.json",
+            outputDir: "docs/candles",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
         },
       },
     ],

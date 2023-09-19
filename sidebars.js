@@ -92,6 +92,11 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "ticker",
+      items: [require("./docs/candles/sidebar.js")],
+    },
+    {
+      type: "category",
       label: "Socket API Reference",
       items: [
         {

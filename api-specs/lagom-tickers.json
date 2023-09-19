@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lagom",
+    "description": "Lagom",
+    "version": "api/v1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "TickerDto": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "sympol",
+            "example": "BTCUSDT"
+          },
+          "last": {
+            "type": "string",
+            "description": "last",
+            "example": "0"
+          },
+          "low": {
+            "type": "string",
+            "description": "low",
+            "example": "0"
+          },
+          "high": {
+            "type": "string",
+            "description": "high",
+            "example": "0"
+          },
+          "open": {
+            "type": "string",
+            "description": "open",
+            "example": "0"
+          },
+          "volume": {
+            "type": "string",
+            "description": "volume",
+            "example": "0"
+          },
+          "quoteVolume": {
+            "type": "string",
+            "description": "quoteVolume",
+            "example": "0"
+          },
+          "compareToOldPrice": {
+            "type": "string",
+            "description": "compareToOldPrice",
+            "example": "0"
+          }
+        },
+        "required": [
+          "symbol",
+          "last",
+          "low",
+          "high",
+          "open",
+          "volume",
+          "quoteVolume",
+          "compareToOldPrice"
+        ]
+      },
+      "ListTickersResponse": {
+        "type": "object",
+        "properties": {
+          "tickers": {
+            "description": "List of tickers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TickerDto"
+            }
+          }
+        },
+        "required": [
+          "tickers"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "undefined": {
+      "undefined": {
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Ticker"
+        ]
+      }
+    },
+    "/api/v1/tickers": {
+      "get": {
+        "operationId": "getAllTickers",
+        "summary": "get all tickers",
+        "description": "get all tickers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTickersResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ticker"
+        ]
+      }
+    }
+  }
+}
