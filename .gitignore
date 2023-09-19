@@ -25,3 +25,4 @@ yarn-error.log*
 /docs/**/*.tag.mdx
 /docs/**/sidebar.js
 /docs/**/versions.json
+.idea
