@@ -3,11 +3,15 @@
   "info": {
     "title": "Lagom",
     "description": "Lagom",
-    "version": "api/v1",
+    "version": "/api/v1/candles/docs",
     "contact": {}
   },
   "tags": [],
-  "servers": [],
+  "servers": [
+    {
+      "url": "https://api-staging.lagom.exchange"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "bearer": {
@@ -17,74 +21,62 @@
       }
     },
     "schemas": {
-      "TickerDto": {
+      "CandleDto": {
         "type": "object",
         "properties": {
-          "symbol": {
-            "type": "string",
-            "description": "sympol",
-            "example": "BTCUSDT"
+          "open": {
+            "type": "number",
+            "description": "open",
+            "example": ""
           },
-          "last": {
-            "type": "string",
-            "description": "last",
-            "example": "0"
+          "close": {
+            "type": "number",
+            "description": "close",
+            "example": ""
           },
           "low": {
-            "type": "string",
+            "type": "number",
             "description": "low",
-            "example": "0"
+            "example": ""
           },
           "high": {
-            "type": "string",
+            "type": "number",
             "description": "high",
-            "example": "0"
-          },
-          "open": {
-            "type": "string",
-            "description": "open",
-            "example": "0"
+            "example": ""
           },
           "volume": {
-            "type": "string",
+            "type": "number",
             "description": "volume",
-            "example": "0"
+            "example": ""
           },
-          "quoteVolume": {
-            "type": "string",
-            "description": "quoteVolume",
-            "example": "0"
-          },
-          "compareToOldPrice": {
-            "type": "string",
-            "description": "compareToOldPrice",
-            "example": "0"
+          "time": {
+            "type": "number",
+            "description": "time",
+            "example": ""
           }
         },
         "required": [
-          "symbol",
-          "last",
+          "open",
+          "close",
           "low",
           "high",
-          "open",
           "volume",
-          "quoteVolume",
-          "compareToOldPrice"
+          "time"
         ]
       },
-      "ListTickersResponse": {
+      "ListCandleResponseDto": {
         "type": "object",
         "properties": {
-          "tickers": {
-            "description": "List of tickers",
+          "data": {
+            "description": "List candle",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TickerDto"
+              "$ref": "#/components/schemas/CandleDto"
             }
           }
         },
         "required": [
-          "tickers"
+          "data"
         ]
       }
     }
@@ -99,30 +91,55 @@
           }
         },
         "tags": [
-          "Ticker"
+          "Candle"
         ]
       }
     },
-    "/api/v1/tickers": {
+    "/api/v1/candles/{idOrSymbol}": {
       "get": {
-        "operationId": "getAllTickers",
-        "summary": "get all tickers",
-        "description": "get all tickers",
-        "parameters": [],
+        "operationId": "get Candles",
+        "summary": "get Candles",
+        "description": "get Candles",
+        "parameters": [
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "resolution",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListTickersResponse"
+                  "$ref": "#/components/schemas/ListCandleResponseDto"
                 }
               }
             }
           }
         },
         "tags": [
-          "Ticker"
+          "Candle"
         ]
       }
     }

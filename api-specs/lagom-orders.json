@@ -1,6 +1,6 @@
 {
   "openapi": "3.0.1",
-  "info": {
+"info": {
     "title": "Lagom Orders",
     "description": "Lagom Orders",
     "version": "v1",
@@ -8,265 +8,15 @@
   },
   "servers": [
     {
-      "url": "https://api.blocksniper.io/api/v1/orders"
+      "url": "https://api-staging.lagom.exchange/api/v1/orders"
     }
   ],
   "paths": {
-    "/rqueue/api/v1/view-data": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "viewData",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DateViewRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataViewResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/queue-data": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "exploreQueue",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/QueueExploreRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataViewResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/pause-unpause-queue": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "pauseUnpauseQueue",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PauseUnpauseQueueRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/move-data": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "dataType",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageMoveRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/MessageMoveResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/delete-queue": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "deleteQueue",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataTypeRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/delete-queue-part": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "deleteAll",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataDeleteRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BooleanResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/delete-message": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "deleteMessage",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageDeleteRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BooleanResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/data-type": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "dataType_1",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataTypeRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/chart": {
-      "post": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "getDashboardData",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChartDataRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChartDataResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/order": {
       "get": {
-        "tags": ["order-controller"],
+        "tags": [
+          "order-controller"
+        ],
         "summary": "get order of user",
         "operationId": "getOrderOfUser",
         "parameters": [
@@ -308,7 +58,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["ASK", "BID"]
+              "enum": [
+                "ASK",
+                "BID"
+              ]
             }
           },
           {
@@ -341,7 +94,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["LIMIT", "MARKET", "STOP_LIMIT"]
+              "enum": [
+                "LIMIT",
+                "MARKET",
+                "STOP_LIMIT"
+              ]
             }
           },
           {
@@ -395,7 +152,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["createdAt", "updatedAt"]
+              "enum": [
+                "createdAt",
+                "updatedAt"
+              ]
             }
           }
         ],
@@ -418,7 +178,9 @@
         ]
       },
       "post": {
-        "tags": ["order-controller"],
+        "tags": [
+          "order-controller"
+        ],
         "operationId": "placeOrder",
         "requestBody": {
           "content": {
@@ -449,7 +211,9 @@
         ]
       },
       "delete": {
-        "tags": ["order-controller"],
+        "tags": [
+          "order-controller"
+        ],
         "operationId": "cancelOrder",
         "parameters": [
           {
@@ -458,7 +222,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["ASK", "BID"]
+              "enum": [
+                "ASK",
+                "BID"
+              ]
             }
           }
         ],
@@ -481,120 +248,11 @@
         ]
       }
     },
-    "/rqueue/api/v1/jobs": {
-      "get": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "getJobs",
-        "parameters": [
-          {
-            "name": "message-id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataViewResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rqueue/api/v1/aggregate-data-selector": {
-      "get": {
-        "tags": ["rqueue-rest-controller"],
-        "operationId": "aggregateDataCounter",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": ["DAILY", "WEEKLY", "MONTHLY"]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataSelectorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/order/id-gen": {
-      "get": {
-        "tags": ["public-order-controller"],
-        "summary": "get order id lastest",
-        "operationId": "getOrderIdLastest",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDtoLong"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/order/{orderId}/trades": {
-      "get": {
-        "tags": ["order-controller"],
-        "summary": "get trading history by order id",
-        "operationId": "getTradingHistoryByOrderId",
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDtoListTradeEntity"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer Authentication": []
-          }
-        ]
-      }
-    },
     "/order/open": {
       "get": {
-        "tags": ["order-controller"],
+        "tags": [
+          "order-controller"
+        ],
         "summary": "get order open of user",
         "operationId": "getOrderOpenOfUser",
         "parameters": [
@@ -636,7 +294,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["ASK", "BID"]
+              "enum": [
+                "ASK",
+                "BID"
+              ]
             }
           },
           {
@@ -653,7 +314,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["LIMIT", "MARKET", "STOP_LIMIT"]
+              "enum": [
+                "LIMIT",
+                "MARKET",
+                "STOP_LIMIT"
+              ]
             }
           },
           {
@@ -662,7 +327,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["NEW", "PENDING", "PARTIALLY_FILLED"]
+              "enum": [
+                "NEW",
+                "PENDING",
+                "PARTIALLY_FILLED"
+              ]
             }
           },
           {
@@ -671,7 +340,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["createdAt", "updatedAt"]
+              "enum": [
+                "createdAt",
+                "updatedAt"
+              ]
             }
           }
         ],
@@ -694,165 +366,11 @@
         ]
       }
     },
-    "/order/open/balance": {
-      "get": {
-        "tags": ["order-controller"],
-        "summary": "get balance in order of user",
-        "operationId": "getBalanceInOrder",
-        "parameters": [
-          {
-            "name": "networkId",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "currencyId",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDtoBalanceInOrderResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer Authentication": []
-          }
-        ]
-      }
-    },
-    "/order/export-to-excel": {
-      "get": {
-        "tags": ["order-controller"],
-        "summary": "Export order of user",
-        "operationId": "exportOrderOfUser",
-        "parameters": [
-          {
-            "name": "orderIds",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          },
-          {
-            "name": "side",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": ["ASK", "BID"]
-            }
-          },
-          {
-            "name": "pair",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": ["LIMIT", "MARKET", "STOP_LIMIT"]
-            }
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "PENDING",
-                "PARTIALLY_FILLED",
-                "FILLED",
-                "CANCELED",
-                "REJECTED",
-                "EXPIRED"
-              ]
-            }
-          },
-          {
-            "name": "startTime",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "default": 0
-            }
-          },
-          {
-            "name": "endTime",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "default": 0
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": ["createdAt", "updatedAt"]
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 10000
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "Bearer Authentication": []
-          }
-        ]
-      }
-    },
     "/order/{orderId}": {
       "delete": {
-        "tags": ["order-controller"],
+        "tags": [
+          "order-controller"
+        ],
         "operationId": "cancelOrder_1",
         "parameters": [
           {
@@ -888,12 +406,21 @@
   "components": {
     "schemas": {
       "DateViewRequest": {
-        "required": ["name", "type"],
+        "required": [
+          "name",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["NONE", "LIST", "ZSET", "KEY", "SET"]
+            "enum": [
+              "NONE",
+              "LIST",
+              "ZSET",
+              "KEY",
+              "SET"
+            ]
           },
           "name": {
             "type": "string"
@@ -916,7 +443,10 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["DELETE", "NONE"]
+            "enum": [
+              "DELETE",
+              "NONE"
+            ]
           },
           "description": {
             "type": "string"
@@ -958,7 +488,9 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["JOBS_BUTTON"]
+            "enum": [
+              "JOBS_BUTTON"
+            ]
           },
           "data": {
             "type": "object"
@@ -970,7 +502,10 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["DISPLAY", "ACTION"]
+            "enum": [
+              "DISPLAY",
+              "ACTION"
+            ]
           },
           "value": {
             "type": "object"
@@ -1001,12 +536,22 @@
         }
       },
       "QueueExploreRequest": {
-        "required": ["name", "src", "type"],
+        "required": [
+          "name",
+          "src",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["NONE", "LIST", "ZSET", "KEY", "SET"]
+            "enum": [
+              "NONE",
+              "LIST",
+              "ZSET",
+              "KEY",
+              "SET"
+            ]
           },
           "name": {
             "type": "string"
@@ -1025,7 +570,9 @@
         }
       },
       "PauseUnpauseQueueRequest": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -1056,14 +603,26 @@
           },
           "srcType": {
             "type": "string",
-            "enum": ["NONE", "LIST", "ZSET", "KEY", "SET"]
+            "enum": [
+              "NONE",
+              "LIST",
+              "ZSET",
+              "KEY",
+              "SET"
+            ]
           },
           "dst": {
             "type": "string"
           },
           "dstType": {
             "type": "string",
-            "enum": ["NONE", "LIST", "ZSET", "KEY", "SET"]
+            "enum": [
+              "NONE",
+              "LIST",
+              "ZSET",
+              "KEY",
+              "SET"
+            ]
           },
           "others": {
             "type": "object",
@@ -1093,7 +652,9 @@
         }
       },
       "DataTypeRequest": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -1102,7 +663,10 @@
         }
       },
       "DataDeleteRequest": {
-        "required": ["data_set", "queue"],
+        "required": [
+          "data_set",
+          "queue"
+        ],
         "type": "object",
         "properties": {
           "queue": {
@@ -1129,7 +693,10 @@
         }
       },
       "MessageDeleteRequest": {
-        "required": ["message_id", "queue"],
+        "required": [
+          "message_id",
+          "queue"
+        ],
         "type": "object",
         "properties": {
           "queue": {
@@ -1160,7 +727,10 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["LATENCY", "STATS"]
+            "enum": [
+              "LATENCY",
+              "STATS"
+            ]
           },
           "queue": {
             "type": "string"
@@ -1171,7 +741,11 @@
           },
           "aggregationType": {
             "type": "string",
-            "enum": ["DAILY", "WEEKLY", "MONTHLY"]
+            "enum": [
+              "DAILY",
+              "WEEKLY",
+              "MONTHLY"
+            ]
           },
           "dateTypes": {
             "type": "array",
@@ -1239,11 +813,18 @@
           },
           "side": {
             "type": "string",
-            "enum": ["ASK", "BID"]
+            "enum": [
+              "ASK",
+              "BID"
+            ]
           },
           "type": {
             "type": "string",
-            "enum": ["LIMIT", "MARKET", "STOP_LIMIT"]
+            "enum": [
+              "LIMIT",
+              "MARKET",
+              "STOP_LIMIT"
+            ]
           },
           "quantity": {
             "type": "string"
@@ -1376,6 +957,45 @@
           },
           "second": {
             "type": "string"
+          }
+        }
+      },
+      "OrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "side": {
+            "type": "string"
+          },
+          "orderType": {
+            "type": "string"
+          },
+          "pairId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "remaining": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "ResponseDtoOrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OrderResponseDto"
           }
         }
       },

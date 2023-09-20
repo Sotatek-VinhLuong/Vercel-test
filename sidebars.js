@@ -93,6 +93,11 @@ const sidebars = {
     {
       type: "category",
       label: "ticker",
+      items: [require("./docs/tickers/sidebar.js")],
+    },
+    {
+      type: "category",
+      label: "candles",
       items: [require("./docs/candles/sidebar.js")],
     },
     {
