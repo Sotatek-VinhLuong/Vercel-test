@@ -82,19 +82,6 @@
     }
   },
   "paths": {
-    "undefined": {
-      "undefined": {
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Candle"
-        ]
-      }
-    },
     "/api/v1/candles/{idOrSymbol}": {
       "get": {
         "operationId": "get Candles",
