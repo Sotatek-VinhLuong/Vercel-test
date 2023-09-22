@@ -7,7 +7,11 @@
     "contact": {}
   },
   "tags": [],
-  "servers": [],
+  "servers": [
+    {
+      "url":"https://api-staging.lagom.exchange/api/v1/marketdata"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "bearer": {

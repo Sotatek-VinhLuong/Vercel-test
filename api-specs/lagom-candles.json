@@ -1,0 +1,134 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lagom",
+    "description": "Lagom",
+    "version": "/api/v1/candles/docs",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "https://api-staging.lagom.exchange"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "CandleDto": {
+        "type": "object",
+        "properties": {
+          "open": {
+            "type": "number",
+            "description": "open",
+            "example": ""
+          },
+          "close": {
+            "type": "number",
+            "description": "close",
+            "example": ""
+          },
+          "low": {
+            "type": "number",
+            "description": "low",
+            "example": ""
+          },
+          "high": {
+            "type": "number",
+            "description": "high",
+            "example": ""
+          },
+          "volume": {
+            "type": "number",
+            "description": "volume",
+            "example": ""
+          },
+          "time": {
+            "type": "number",
+            "description": "time",
+            "example": ""
+          }
+        },
+        "required": [
+          "open",
+          "close",
+          "low",
+          "high",
+          "volume",
+          "time"
+        ]
+      },
+      "ListCandleResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "List candle",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CandleDto"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/candles/{idOrSymbol}": {
+      "get": {
+        "operationId": "get Candles",
+        "summary": "get Candles",
+        "description": "get Candles",
+        "parameters": [
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "resolution",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCandleResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Candle"
+        ]
+      }
+    }
+  }
+}
